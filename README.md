@@ -1,79 +1,141 @@
-# CF FetchCodes Documentation
+# CF FetchCodes
 
-## Introduction
-**CF FetchCodes** is a powerful browser extension designed to enhance the CodeForces experience for developers and coding enthusiasts.
+> View your Codeforces friends' accepted solutions + AI-powered code explanations — right on the problem page.
 
-Stuck on a problem? Want to see how your friend solved it? With CF FetchCodes, you can effortlessly fetch and explore the accepted codes of your CodeForces friends directly on the problem page, gaining valuable insights and expanding your coding horizons.
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Install-blue?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/cf-fetchcodes/ombmefkchmjbodcoboeagbpaejfojnga)
+[![YouTube](https://img.shields.io/badge/YouTube-Watch%20Demo-red?logo=youtube)](https://www.youtube.com/watch?v=gcQwU1W23x8)
+
+---
+
+## What It Does
+
+Stuck on a Codeforces problem? Wondering how your friends solved it?
+
+**CF FetchCodes** adds a sidebar widget on every problem page that lets you:
+
+- 📋 **See which friends solved the problem** — auto-detected from your CF friends list
+- 💻 **Read their code** with syntax highlighting — right on the page, no navigation needed
+- 🤖 **Ask AI to explain any solution** — built-in Gemini-powered chat explainer
+- ✂️ **Explain selected code snippets** — right-click any selected text on Codeforces
+
+---
 
 ## Installation
-To install CF FetchCodes, follow these steps:
-1. Visit the [Chrome Web Store](https://chromewebstore.google.com/detail/cf-fetchcodes/ombmefkchmjbodcoboeagbpaejfojnga).
-2. Click on the **"Add to Chrome"** button.
-3. A confirmation dialog will appear. Click **"Add extension"** to install CF FetchCodes.
-4. Once installed, CF FetchCodes will be added to your browser's toolbar.
 
-## Usage
-CF FetchCodes adds a new section named **"Accepted Codes of Friends"** on the sidebar of every CodeForces problem page.
+### From Chrome Web Store (Recommended)
 
-### Step-by-Step Guide:
-1. **Visit a Problem:** Go to any problem page on CodeForces (e.g., Problem A in a recent contest).
-2. **Find the Sidebar:** Locate the "Accepted Codes of Friends" box on the right sidebar.
-3. **Click "Show Codes":** This opens the new list view.
-4. **View the List:** A pop-up will appear showing a list of all friends who have solved that problem.
-   
-   <img src="Documentation/Images/newTheme.png" alt="Loading Progress" width="600"/>
-   
-   *You can see the progress bar as the extension safely checks your friends' status.*
+1. Visit the [Chrome Web Store listing](https://chromewebstore.google.com/detail/cf-fetchcodes/ombmefkchmjbodcoboeagbpaejfojnga)
+2. Click **"Add to Chrome"** → **"Add extension"**
+3. Done! The extension icon appears in your toolbar
 
-5. **Expand Code:** Click on any friend's name to expand the section and view their code instantly!
-   
-   <img src="Documentation/Images/changeLog2.png" alt="Accordion UI View" width="600"/>
+### From Source (Developer)
 
-6. **Explore:** You can copy the code, read it with syntax highlighting, or click the "View original submission" link to go to the official page.
+1. Clone this repository
+2. Open `chrome://extensions` → enable **Developer mode**
+3. Click **Load unpacked** → select this project folder
+4. Navigate to any Codeforces problem page
 
-📺 [YouTube Guide: CF FetchCodes](https://www.youtube.com/watch?v=gcQwU1W23x8) *(Note: Video may show older UI)*
+---
+
+## How to Use
+
+### 1. Add Friends on Codeforces
+
+The extension uses your Codeforces friends list. If you haven't added friends yet:
+
+1. Go to any user's profile on Codeforces
+2. Click the **⭐ Star** button next to their handle
+
+<img src="docs/Images/friendButton.png" alt="Add Friend" width="320"/>
+
+### 2. View Friends' Solutions
+
+1. Open any problem page (e.g., `codeforces.com/contest/1234/problem/A`)
+2. Find **"→ Accepted Codes of Friends"** in the right sidebar
+3. Click **"Show Codes"**
+
+<img src="docs/Images/newTheme.png" alt="Friends modal with progress bar" width="600"/>
+
+4. The extension checks your friends and shows who solved it
+5. Click any friend's name to expand and view their code
+
+<img src="docs/Images/changeLog2.png" alt="Expanded code view" width="600"/>
+
+### 3. AI Code Explainer
+
+Click the **🤖 Explain** button above any friend's code to open an AI chat that:
+- Analyzes the solution approach
+- Explains the time/space complexity
+- Answers follow-up questions
+
+**Setup required:** Click the extension icon in the toolbar and paste your [Gemini API key](https://aistudio.google.com/app/apikey).
+
+### 4. Right-Click Snippet Explain
+
+Select any text on a Codeforces page → right-click → **"Explain code with AI"** to get an instant explanation.
+
+---
+
+## AI Settings
+
+Click the extension icon in the toolbar to configure:
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| 🔑 **Gemini API Key** | Your Google AI Studio API key | *(required)* |
+| 🤖 **AI Model** | Gemini model name | `gemini-2.5-flash` |
+| 📝 **Full Code Prompt** | System prompt for full code explanations | Analyze approach + complexity |
+| ✂️ **Snippet Prompt** | System prompt for right-click snippet explanations | Explain logic + syntax |
+
+---
+
+## Privacy & Safety
+
+- **No external servers** — all processing happens locally in your browser
+- **Anti-ban architecture** — human-like delays and smart batching prevent rate-limiting
+- **Two-phase discovery** — uses `contest.standings` API for bulk checking, minimizing API calls
+- **API key stored locally** — your Gemini key is saved in `chrome.storage.local`, never transmitted anywhere except Google's Gemini API
 
 ---
 
 ## Prerequisites
-**Note:** This feature assumes that you have added friends on your CodeForces account.
 
-#### How to Add Friends on CodeForces:
-1. Log in to your CodeForces account.
-2. Go to the profile page of the user you want to add as a friend.
-3. Click the **"Star"** ⭐️ button next to their handle.
+- Google Chrome (or any Chromium-based browser)
+- A Codeforces account with friends added
+- *(Optional)* A [Gemini API key](https://aistudio.google.com/app/apikey) for AI features
 
-<img src="Documentation/Images/friendButton.png" alt="Add Friend Button" width="320"/>
-
-Once you have added friends, CF FetchCodes will be able to display their accepted codes.
-
-## Privacy and Safety (New in v25.11.21)
-CF FetchCodes prioritizes your account safety. The extension operates entirely within your browser.
-
-* **Anti-Ban Architecture:** We use "Human-Like" delays and randomization when fetching data to ensure your account is never flagged for rate-limiting by CodeForces.
-* **Local Processing:** Your personal data remains secure; no sensitive information is stored on external servers.
-
-## Feedback and Contributions
-We welcome your feedback and contributions! If you encounter any issues or have suggestions for enhancements, please visit our [GitHub repository](https://github.com/sa-paul/CF_FetchCodes).
-
-You can submit bug reports, feature requests, or even contribute code through pull requests.
-
-## Support and Contact
-If you need any assistance, feel free to reach out to our support team. You can contact us by sending an email to [sayanpauldeveloper@gmail.com](mailto:sayanpauldeveloper@gmail.com).
+---
 
 ## Release Notes
 
-### Version 25.11.21 (Major Update)
-* **New Accordion UI:** Replaced the old popup with a clean, scrollable list. Click a friend's name to reveal code only when you need it.
-* **Smart Caching:** Code is fetched once and saved in memory. Re-opening a friend's code is now instant and saves bandwidth.
-* **Safety First:** Implemented a smart batching system that checks friends in small groups to prevent API errors.
-* **Progress Bar:** Visual indicator showing how many friends have been checked.
+### v26.7.9 (Latest)
+- **Two-Phase Discovery** — uses `contest.standings` for instant friend checking (10x faster)
+- **AI Code Explainer** — built-in Gemini chat for understanding solutions
+- **Right-Click Explain** — select code → right-click → explain with AI
+- **Modular Architecture** — codebase split into focused modules under `src/`
+- **Toast Notifications** — non-intrusive feedback replaces browser alerts
+- **Auto-Growing Chat Input** — textarea that expands as you type, Shift+Enter for newlines
 
-### Version 0.1.0
-- **Code Highlighter:** Implemented syntax highlighting similar to the default highlighter on CodeForces.
-- **Navigation:** Added clickable links to navigate to a friend's profile and submission.
+### v25.11.21
+- New accordion UI with scrollable list
+- Smart caching — re-opening code is instant
+- Progress bar for friend checking status
+- Safety-first batching system
 
-## Conclusion
-CF FetchCodes is your go-to companion for upsolving and learning from your peers. Install CF FetchCodes today and unlock a world of coding possibilities on CodeForces.
+### v0.1.0
+- Syntax highlighting for friend solutions
+- Navigation links to profiles and submissions
 
-**Happy coding!**
+---
+
+## Contributing
+
+Issues, feature requests, and pull requests are welcome at the [GitHub repository](https://github.com/sa-paul/CF_FetchCodes).
+
+## Contact
+
+📧 [sayanpauldeveloper@gmail.com](mailto:sayanpauldeveloper@gmail.com)
+
+---
+
+**Happy upsolving!** 🚀

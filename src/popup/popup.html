@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FetchCodes</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <div class="popUpContainer">
+
+    <h2 class="popUpNamePlate">
+      CF 
+      <span id="popUpNameFetch">Fetch</span>
+      <span id="popUpNameCodes">Codes</span>
+    </h2>
+
+    <img src="../../assets/icon_128_128.png" id="popUpLogo" alt="FetchCodes Logo">
+
+    <div class="ai-settings-container">
+        
+        <div class="input-group">
+            <label for="apiKeyInput">🔑 Gemini API Key</label>
+            <input type="password" id="apiKeyInput" placeholder="Paste Key Here">
+        </div>
+
+        <div class="input-group">
+            <label for="modelInput">🤖 AI Model (e.g. gemini-2.5-flash)</label>
+            <input type="text" id="modelInput" placeholder="gemini-2.5-flash">
+        </div>
+
+        <div class="input-group">
+            <label for="fullPromptInput">📝 Full Code Prompt</label>
+            <textarea id="fullPromptInput" placeholder="Ex: Explain time complexity..."></textarea>
+        </div>
+
+        <div class="input-group">
+            <label for="snippetPromptInput">✂️ Snippet Prompt</label>
+            <textarea id="snippetPromptInput" placeholder="Ex: Explain syntax..."></textarea>
+        </div>
+
+        <button id="saveBtn">Save AI Settings</button>
+        <div id="status"></div>
+    </div>
+
+    <div class="developer-section">
+      <span id="developerContact" title="Open GitHub Profile">Developed by</span>
+      <button id="developerHandle" title="Open Codeforces Profile">sapaul</button>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+
+</body>
+</html>
