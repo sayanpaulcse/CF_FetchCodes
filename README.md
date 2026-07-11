@@ -130,7 +130,7 @@ Click the extension icon in the toolbar to configure:
 
 ## Contributing
 
-Issues, feature requests, and pull requests are welcome at the [GitHub repository](https://github.com/sa-paul/CF_FetchCodes).
+Issues, feature requests, and pull requests are welcome at the [GitHub repository](https://github.com/sayanpaulcse/CF_FetchCodes).
 
 ## Contact
 

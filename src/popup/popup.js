@@ -16,7 +16,7 @@ function goDeveloperProfile() {
 }
 
 function goGithubProfile() {
-    chrome.tabs.create({ url: 'https://github.com/sa-paul' });
+    chrome.tabs.create({ url: 'https://github.com/sayanpaulcse' });
 }
 
 // ==========================================
