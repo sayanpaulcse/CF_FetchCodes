@@ -95,6 +95,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (pageDarkToggle) {
         pageDarkToggle.addEventListener('change', () => {
             chrome.storage.local.set({ cfPageDarkMode: pageDarkToggle.checked });
+            // When page dark mode is ON, also enable code dark mode
+            if (pageDarkToggle.checked) {
+                codeDarkToggle.checked = true;
+                chrome.storage.local.set({ cfCodeDarkMode: true });
+                themeSelectGroup.style.display = 'block';
+            }
         });
     }
 

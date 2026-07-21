@@ -769,170 +769,475 @@
 
 
 /* =============================================================================
-   16. PROBLEM PAGE DARK MODE
+   16. PROBLEM PAGE DARK MODE (COMPREHENSIVE)
    =============================================================================
    Activated by data-cf-dark="true" on <html>.
-   Overrides Codeforces page elements + all extension-injected UI.
+   Comprehensive dark mode covering all Codeforces page elements.
    ============================================================================= */
 
-/* Dark Mode CSS Variables */
+/* --- CSS Variables --- */
 [data-cf-dark="true"] {
-    --cf-dark-bg: #1a1a2e;
-    --cf-dark-surface: #16213e;
-    --cf-dark-surface-alt: #1b2838;
+    --cf-dark-bg: #121212;
+    --cf-dark-surface: #1e1e1e;
+    --cf-dark-surface-alt: #252526;
+    --cf-dark-surface-light: #2d2d2d;
     --cf-dark-text: #e0e0e0;
     --cf-dark-text-muted: #a0a0a0;
-    --cf-dark-border: #2a3a4a;
-    --cf-dark-primary: #6bb5ff;
-    --cf-dark-hover: #253550;
+    --cf-dark-border: #333;
+    --cf-dark-border-light: #444;
+    --cf-dark-primary: #61afef;
+    --cf-dark-hover: #3e3e42;
+    scrollbar-color: #444 #1e1e1e;
 }
 
-/* --- Codeforces Page Base --- */
+
+/* =============================================================================
+   16.1 GLOBAL RESET & BACKGROUNDS
+   ============================================================================= */
 [data-cf-dark="true"] body {
     background-color: var(--cf-dark-bg) !important;
     color: var(--cf-dark-text) !important;
 }
 
 [data-cf-dark="true"] #pageContent,
+[data-cf-dark="true"] #wrapper,
 [data-cf-dark="true"] #body,
-[data-cf-dark="true"] .content-with-sidebar {
-    background-color: var(--cf-dark-bg) !important;
+[data-cf-dark="true"] .content-with-sidebar,
+[data-cf-dark="true"] #footer {
+    background-color: transparent !important;
 }
 
-/* --- Page Header & Footer --- */
-[data-cf-dark="true"] #header,
-[data-cf-dark="true"] #footer,
-[data-cf-dark="true"] .second-level-menu,
-[data-cf-dark="true"] .lang-chooser,
-[data-cf-dark="true"] .menu-list,
-[data-cf-dark="true"] .menu-list-container {
-    background-color: var(--cf-dark-surface) !important;
-    color: var(--cf-dark-text) !important;
-    border-color: var(--cf-dark-border) !important;
+/* Links */
+[data-cf-dark="true"] a { color: var(--cf-dark-primary) !important; text-decoration: none; }
+[data-cf-dark="true"] a:hover { color: #4fa6ff !important; text-decoration: underline; }
+[data-cf-dark="true"] a:visited { color: #c678dd !important; }
+
+/* Selection */
+[data-cf-dark="true"] ::selection {
+    background: #264f78 !important;
+    color: #ffffff !important;
 }
 
-[data-cf-dark="true"] #header a,
-[data-cf-dark="true"] #footer a,
-[data-cf-dark="true"] .second-level-menu a,
-[data-cf-dark="true"] .menu-list a {
+
+/* =============================================================================
+   16.2 NAVIGATION BAR & HEADER
+   ============================================================================= */
+[data-cf-dark="true"] #header {
+    background-color: #181818 !important;
+}
+
+[data-cf-dark="true"] .menu-box {
+    background: linear-gradient(to bottom, #2d2d2d, #252526) !important;
+    border: 1px solid var(--cf-dark-border) !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2) !important;
+    border-radius: 4px;
+}
+
+[data-cf-dark="true"] .menu-list-container a {
+    color: #eeeeee !important;
+    text-shadow: none !important;
+    font-weight: 500;
+}
+
+[data-cf-dark="true"] .menu-list-container li.current a {
+    background: var(--cf-dark-hover) !important;
     color: var(--cf-dark-primary) !important;
+    border-bottom: 3px solid var(--cf-dark-primary) !important;
+    border-radius: 4px 4px 0 0;
 }
 
-/* --- Sidebar --- */
-[data-cf-dark="true"] #sidebar {
-    background-color: var(--cf-dark-bg) !important;
-}
-
-[data-cf-dark="true"] #sidebar .roundbox,
-[data-cf-dark="true"] #sidebar .sidebox {
+[data-cf-dark="true"] .search,
+[data-cf-dark="true"] .search input {
     background-color: var(--cf-dark-surface) !important;
-    border-color: var(--cf-dark-border) !important;
+    color: #fff !important;
+    border-color: var(--cf-dark-border-light) !important;
 }
 
-[data-cf-dark="true"] #sidebar .caption {
+[data-cf-dark="true"] .lang-chooser a,
+[data-cf-dark="true"] .enter-or-register-box a {
+    color: #dcdcdc !important;
+}
+
+
+/* =============================================================================
+   16.3 SIDEBAR
+   ============================================================================= */
+[data-cf-dark="true"] .roundbox,
+[data-cf-dark="true"] .sidebox {
     background-color: var(--cf-dark-surface-alt) !important;
-    color: var(--cf-dark-text) !important;
-    border-color: var(--cf-dark-border) !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    color: #cccccc !important;
 }
 
-[data-cf-dark="true"] #sidebar a,
-[data-cf-dark="true"] #sidebar .sidebar-link {
+[data-cf-dark="true"] .roundbox .caption,
+[data-cf-dark="true"] .roundbox .titled,
+[data-cf-dark="true"] .sidebox .caption {
     color: var(--cf-dark-primary) !important;
+    border-bottom: 1px solid var(--cf-dark-border-light) !important;
+    font-weight: bold;
 }
 
-/* --- Roundboxes / Cards --- */
-[data-cf-dark="true"] .roundbox {
-    background-color: var(--cf-dark-surface) !important;
-    border-color: var(--cf-dark-border) !important;
-    color: var(--cf-dark-text) !important;
+[data-cf-dark="true"] .roundbox a,
+[data-cf-dark="true"] .sidebox a {
+    color: #dcdcdc !important;
 }
 
-[data-cf-dark="true"] .titled {
+[data-cf-dark="true"] .roundbox a:hover { color: #fff !important; }
+
+[data-cf-dark="true"] .rtable td,
+[data-cf-dark="true"] .rtable th {
+    border-bottom: 1px solid var(--cf-dark-border-light) !important;
+    color: #ccc !important;
+}
+
+[data-cf-dark="true"] .alert {
+    background-color: #332b00 !important;
+    color: #e6e6e6 !important;
+    border: 1px solid #665500 !important;
+}
+
+/* Contest Status */
+[data-cf-dark="true"] .contest-state-phase {
+    background-color: var(--cf-dark-surface-light) !important;
+    color: #eee !important;
+}
+
+[data-cf-dark="true"] .contest-state-regular,
+[data-cf-dark="true"] .contest-state-regular td {
     background-color: var(--cf-dark-surface-alt) !important;
-    color: var(--cf-dark-text) !important;
-    border-color: var(--cf-dark-border) !important;
+    color: #eeeeee !important;
+    border-color: var(--cf-dark-border-light) !important;
 }
 
-/* --- Problem Statement --- */
-[data-cf-dark="true"] .problem-statement {
-    color: var(--cf-dark-text) !important;
+[data-cf-dark="true"] .contest-state-regular a {
+    color: var(--cf-dark-primary) !important;
+    font-weight: bold;
+}
+
+
+/* =============================================================================
+   16.4 MATHJAX & FORMULAS (Gold Theme)
+   ============================================================================= */
+[data-cf-dark="true"] .MathJax,
+[data-cf-dark="true"] .MathJax span,
+[data-cf-dark="true"] .MathJax div,
+[data-cf-dark="true"] .MathJax svg path,
+[data-cf-dark="true"] .MathJax g,
+[data-cf-dark="true"] .mjx-chtml,
+[data-cf-dark="true"] .mjx-math,
+[data-cf-dark="true"] .mjx-char,
+[data-cf-dark="true"] .mjx-box {
+    color: #e5c07b !important;
+    fill: #e5c07b !important;
+    background-color: transparent !important;
+}
+
+[data-cf-dark="true"] .ttypography i,
+[data-cf-dark="true"] .ttypography span.tex-span {
+    color: #e5c07b !important;
+    font-weight: bold;
+    font-family: "Times New Roman", serif;
+}
+
+[data-cf-dark="true"] img.tex-formula,
+[data-cf-dark="true"] img.tex-span {
+    filter: invert(1) hue-rotate(180deg) contrast(1.2) !important;
+}
+
+
+/* =============================================================================
+   16.5 TABLES, SUBMISSIONS & VERDICTS
+   ============================================================================= */
+[data-cf-dark="true"] table,
+[data-cf-dark="true"] .datatable,
+[data-cf-dark="true"] .status-frame-datatable {
+    background-color: var(--cf-dark-surface) !important;
+    color: #ddd !important;
+    border-collapse: collapse;
+}
+
+[data-cf-dark="true"] .datatable td,
+[data-cf-dark="true"] .datatable th,
+[data-cf-dark="true"] .status-frame-datatable td,
+[data-cf-dark="true"] .status-frame-datatable th {
+    border: 1px solid var(--cf-dark-border) !important;
+    background-color: var(--cf-dark-surface) !important;
+    color: #ddd !important;
+    padding: 4px 8px !important;
+}
+
+[data-cf-dark="true"] table td,
+[data-cf-dark="true"] table th {
+    border-color: var(--cf-dark-border) !important;
+    color: #ddd !important;
+}
+
+[data-cf-dark="true"] .datatable .dark {
+    background-color: var(--cf-dark-surface-alt) !important;
+}
+
+/* Verdict Colors */
+[data-cf-dark="true"] .verdict-accepted { color: #98c379 !important; font-weight: bold; }
+[data-cf-dark="true"] .verdict-rejected { color: #e06c75 !important; font-weight: bold; }
+[data-cf-dark="true"] .verdict-compilation-error { color: #dcdcaa !important; }
+[data-cf-dark="true"] .verdict-successful-hack { color: #98c379 !important; font-weight: bold; }
+[data-cf-dark="true"] .verdict-unsuccessful-hack { color: #e06c75 !important; font-weight: bold; }
+[data-cf-dark="true"] .verdict-testing { color: var(--cf-dark-primary) !important; font-weight: bold; }
+[data-cf-dark="true"] .verdict-waiting { color: #aaa !important; }
+
+[data-cf-dark="true"] .datatable a.view-source {
+    color: var(--cf-dark-primary) !important;
+    font-family: monospace;
+}
+
+
+/* =============================================================================
+   16.6 PROBLEM STATEMENT & TYPOGRAPHY
+   ============================================================================= */
+[data-cf-dark="true"] .ttypography { color: #dcdcdc !important; }
+[data-cf-dark="true"] .ttypography p,
+[data-cf-dark="true"] .ttypography li { color: #dddddd !important; }
+
+[data-cf-dark="true"] .problem-statement .section-title {
+    color: #98c379 !important;
+    font-weight: bold;
+    font-size: 1.1em !important;
 }
 
 [data-cf-dark="true"] .problem-statement .header .title {
     color: #fff !important;
 }
 
-[data-cf-dark="true"] .problem-statement .section-title {
+[data-cf-dark="true"] .ttypography code,
+[data-cf-dark="true"] .ttypography pre {
+    background-color: var(--cf-dark-surface-light) !important;
+    color: #e06c75 !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
+}
+
+/* Sample Tests (Striping Fix — critical) */
+[data-cf-dark="true"] .sample-tests .input,
+[data-cf-dark="true"] .sample-tests .output {
+    background-color: var(--cf-dark-surface) !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
+}
+
+[data-cf-dark="true"] .sample-tests pre,
+[data-cf-dark="true"] .sample-tests .input div,
+[data-cf-dark="true"] .sample-tests .output div,
+[data-cf-dark="true"] .test-example-line-even,
+[data-cf-dark="true"] .test-example-line-odd {
+    background-color: transparent !important;
+    color: var(--cf-dark-text) !important;
+    font-family: 'Consolas', monospace;
+}
+
+[data-cf-dark="true"] .sample-tests .title {
+    color: #888 !important;
+    border-bottom: 1px solid var(--cf-dark-border-light) !important;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+/* Spoilers & Tutorial Blocks */
+[data-cf-dark="true"] .spoiler .spoiler-title {
+    background-color: var(--cf-dark-surface-alt) !important;
     color: var(--cf-dark-primary) !important;
+    border-color: var(--cf-dark-border-light) !important;
 }
 
-[data-cf-dark="true"] .problem-statement .input-specification,
-[data-cf-dark="true"] .problem-statement .output-specification,
-[data-cf-dark="true"] .problem-statement .sample-tests,
-[data-cf-dark="true"] .problem-statement .note {
-    color: var(--cf-dark-text) !important;
+[data-cf-dark="true"] .spoiler .spoiler-content {
+    background-color: var(--cf-dark-surface) !important;
+    color: #dcdcdc !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
 }
 
-[data-cf-dark="true"] .problem-statement pre {
-    background-color: var(--cf-dark-surface-alt) !important;
-    color: var(--cf-dark-text) !important;
-    border-color: var(--cf-dark-border) !important;
-}
-
-[data-cf-dark="true"] .problem-statement .sample-test .input,
-[data-cf-dark="true"] .problem-statement .sample-test .output {
-    background-color: var(--cf-dark-surface-alt) !important;
-    border-color: var(--cf-dark-border) !important;
-}
-
-[data-cf-dark="true"] .problem-statement .sample-test .input .title,
-[data-cf-dark="true"] .problem-statement .sample-test .output .title {
-    color: var(--cf-dark-primary) !important;
-}
-
-/* --- Tables --- */
-[data-cf-dark="true"] table,
-[data-cf-dark="true"] table td,
-[data-cf-dark="true"] table th {
-    border-color: var(--cf-dark-border) !important;
-    color: var(--cf-dark-text) !important;
-}
-
-[data-cf-dark="true"] table th {
-    background-color: var(--cf-dark-surface-alt) !important;
-}
-
-[data-cf-dark="true"] table tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.02) !important;
-}
-
-/* --- Links --- */
-[data-cf-dark="true"] a {
-    color: var(--cf-dark-primary) !important;
-}
-
-[data-cf-dark="true"] a:visited {
-    color: #9f8fff !important;
-}
-
-/* --- MathJax --- */
-[data-cf-dark="true"] .MathJax,
-[data-cf-dark="true"] .MathJax_Display {
-    color: var(--cf-dark-text) !important;
-}
-
-/* --- Input/Textarea --- */
-[data-cf-dark="true"] input,
-[data-cf-dark="true"] textarea,
-[data-cf-dark="true"] select {
-    background-color: var(--cf-dark-surface-alt) !important;
-    color: var(--cf-dark-text) !important;
-    border-color: var(--cf-dark-border) !important;
+[data-cf-dark="true"] .spoiler .spoiler-content pre,
+[data-cf-dark="true"] .spoiler .spoiler-content code,
+[data-cf-dark="true"] .spoiler .spoiler-content div {
+    background-color: transparent !important;
+    color: #dcdcdc !important;
 }
 
 
 /* =============================================================================
-   17. MODAL DARK MODE (Page Dark Mode)
+   16.7 USERNAME COLORS (High Contrast for Dark Mode)
+   ============================================================================= */
+[data-cf-dark="true"] a.rated-user,
+[data-cf-dark="true"] span.rated-user {
+    font-weight: bold !important;
+    text-shadow: 0 0 1px rgba(0,0,0,0.5);
+}
+
+/* Newbie (Grey) */
+[data-cf-dark="true"] .user-gray,
+[data-cf-dark="true"] a.user-gray,
+[data-cf-dark="true"] .legend-user-gray { color: #dcdcdc !important; }
+
+/* Pupil (Green) */
+[data-cf-dark="true"] .user-green,
+[data-cf-dark="true"] a.user-green,
+[data-cf-dark="true"] .legend-user-green { color: #98c379 !important; }
+
+/* Specialist (Cyan) */
+[data-cf-dark="true"] .user-cyan,
+[data-cf-dark="true"] a.user-cyan,
+[data-cf-dark="true"] .legend-user-cyan { color: #56b6c2 !important; }
+
+/* Expert (Blue) */
+[data-cf-dark="true"] .user-blue,
+[data-cf-dark="true"] a.user-blue,
+[data-cf-dark="true"] .legend-user-blue { color: #61afef !important; }
+
+/* Candidate Master (Violet) */
+[data-cf-dark="true"] .user-violet,
+[data-cf-dark="true"] a.user-violet,
+[data-cf-dark="true"] .legend-user-violet { color: #c678dd !important; }
+
+/* Master (Orange) */
+[data-cf-dark="true"] .user-orange,
+[data-cf-dark="true"] a.user-orange,
+[data-cf-dark="true"] .legend-user-orange { color: #e5c07b !important; }
+
+/* Grandmaster (Red) */
+[data-cf-dark="true"] .user-red,
+[data-cf-dark="true"] a.user-red,
+[data-cf-dark="true"] .legend-user-red { color: #ff6161 !important; }
+
+/* Legendary Grandmaster */
+[data-cf-dark="true"] .user-legendary { color: #ff6161 !important; }
+[data-cf-dark="true"] .user-legendary::first-letter { color: #ffffff !important; }
+
+/* Admin */
+[data-cf-dark="true"] .user-admin,
+[data-cf-dark="true"] a.user-admin { color: #ffffff !important; }
+
+/* Unrated / Black */
+[data-cf-dark="true"] a.user-black,
+[data-cf-dark="true"] .legend-user-black { color: #bbbbbb !important; }
+
+
+/* =============================================================================
+   16.8 FORMS, INPUTS & BUTTONS
+   ============================================================================= */
+[data-cf-dark="true"] input,
+[data-cf-dark="true"] select,
+[data-cf-dark="true"] textarea {
+    background-color: #2c2c2c !important;
+    color: #fff !important;
+    border: 1px solid #555 !important;
+    padding: 4px;
+    border-radius: 3px;
+}
+
+[data-cf-dark="true"] .sidebox input[type="text"],
+[data-cf-dark="true"] .sidebox input[type="password"],
+[data-cf-dark="true"] .login-box input {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    border: 1px solid #666 !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+}
+
+[data-cf-dark="true"] .submit,
+[data-cf-dark="true"] input[type="submit"] {
+    background: #0054aa !important;
+    color: #ffffff !important;
+    border: 1px solid #004080 !important;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+[data-cf-dark="true"] .submit:hover,
+[data-cf-dark="true"] input[type="submit"]:hover {
+    background: #0066cc !important;
+}
+
+[data-cf-dark="true"] .pagination span,
+[data-cf-dark="true"] .pagination a {
+    color: #ccc !important;
+}
+
+[data-cf-dark="true"] .pagination .active {
+    color: #fff !important;
+    font-weight: bold;
+    border-bottom: 1px solid #fff;
+}
+
+
+/* =============================================================================
+   16.9 CODE EDITOR & PAGE PRETTYPRINT
+   ============================================================================= */
+[data-cf-dark="true"] .ace_editor,
+[data-cf-dark="true"] .ace-chrome {
+    background-color: var(--cf-dark-surface) !important;
+    color: #ccc !important;
+}
+
+[data-cf-dark="true"] .ace_gutter {
+    background-color: var(--cf-dark-surface-alt) !important;
+    color: #888 !important;
+}
+
+[data-cf-dark="true"] input[type="file"] {
+    color: #ccc !important;
+}
+
+/* Page Prettyprint (CF's own code blocks on the page) */
+[data-cf-dark="true"] .prettyprint,
+[data-cf-dark="true"] pre.prettyprint {
+    background-color: var(--cf-dark-surface) !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
+    color: #abb2bf !important;
+    padding: 10px !important;
+}
+
+[data-cf-dark="true"] .prettyprint ol {
+    background-color: transparent !important;
+    margin: 0 !important;
+    padding: 0 0 0 40px !important;
+}
+
+[data-cf-dark="true"] .prettyprint li {
+    background-color: transparent !important;
+    border-bottom: none !important;
+    border-left: 3px solid var(--cf-dark-border-light) !important;
+    color: #5c6370 !important;
+    padding-left: 10px !important;
+    list-style-type: decimal !important;
+}
+
+[data-cf-dark="true"] .prettyprint .kwd { color: #c678dd !important; font-weight: bold; }
+[data-cf-dark="true"] .prettyprint .typ { color: #e5c07b !important; }
+[data-cf-dark="true"] .prettyprint .lit { color: #d19a66 !important; }
+[data-cf-dark="true"] .prettyprint .str { color: #98c379 !important; }
+[data-cf-dark="true"] .prettyprint .com { color: #7f848e !important; font-style: italic; }
+[data-cf-dark="true"] .prettyprint .pln { color: #abb2bf !important; }
+[data-cf-dark="true"] .prettyprint .pun { color: #56b6c2 !important; }
+[data-cf-dark="true"] .prettyprint .tag { color: #e06c75 !important; }
+
+
+/* =============================================================================
+   16.10 FOOTER & EXTRAS
+   ============================================================================= */
+[data-cf-dark="true"] #footer {
+    border-top: 1px solid var(--cf-dark-border) !important;
+    color: #777 !important;
+}
+
+[data-cf-dark="true"] #footer a {
+    color: #888 !important;
+}
+
+[data-cf-dark="true"] .topic .title,
+[data-cf-dark="true"] .comment .header {
+    color: #ccc !important;
+}
+
+
+/* =============================================================================
+   17. MODAL DARK MODE
    ============================================================================= */
 [data-cf-dark="true"] .modalContent {
     background-color: var(--cf-dark-surface) !important;
@@ -967,7 +1272,7 @@
     background-color: var(--cf-dark-bg) !important;
 }
 
-/* --- Accordion Dark --- */
+/* Accordion Dark */
 [data-cf-dark="true"] .accordion-item {
     background: var(--cf-dark-surface) !important;
     border-color: var(--cf-dark-border) !important;
@@ -991,7 +1296,7 @@
     background-color: var(--cf-dark-surface) !important;
 }
 
-/* --- Code Toolbar Dark --- */
+/* Code Toolbar Dark */
 [data-cf-dark="true"] .cf-code-toolbar {
     background: var(--cf-dark-surface-alt) !important;
     border-bottom-color: var(--cf-dark-border) !important;
@@ -1001,7 +1306,7 @@
     color: var(--cf-dark-primary) !important;
 }
 
-/* --- Status Banners Dark --- */
+/* Status Banners Dark */
 [data-cf-dark="true"] .cf-status-banner--error {
     background: rgba(224, 108, 117, 0.1) !important;
     border-color: rgba(224, 108, 117, 0.3) !important;
@@ -1078,7 +1383,7 @@
     border-color: var(--cf-dark-primary) !important;
 }
 
-/* --- Markdown Code Blocks in Chat (Dark) --- */
+/* Markdown Code Blocks in Chat */
 [data-cf-dark="true"] .md-code-wrapper {
     border-color: var(--cf-dark-border) !important;
     background-color: var(--cf-dark-surface-alt) !important;

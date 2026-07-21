@@ -5,78 +5,96 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FetchCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
 
   <div class="popUpContainer">
 
-    <h2 class="popUpNamePlate">
-      CF 
-      <span id="popUpNameFetch">Fetch</span>
-      <span id="popUpNameCodes">Codes</span>
-    </h2>
-
-    <img src="../../assets/icon_128_128.png" id="popUpLogo" alt="FetchCodes Logo">
-
-    <div class="dark-mode-settings-container">
-        <h3 class="section-title">🌙 Dark Mode</h3>
-        
-        <div class="toggle-group">
-            <label class="toggle-label" for="pageDarkToggle">Problem Page</label>
-            <label class="toggle-switch">
-                <input type="checkbox" id="pageDarkToggle">
-                <span class="toggle-slider"></span>
-            </label>
-        </div>
-
-        <div class="toggle-group">
-            <label class="toggle-label" for="codeDarkToggle">Code Only</label>
-            <label class="toggle-switch">
-                <input type="checkbox" id="codeDarkToggle">
-                <span class="toggle-slider"></span>
-            </label>
-        </div>
-
-        <div class="input-group" id="themeSelectGroup" style="display: none;">
-            <label for="codeThemeSelect">🎨 Code Theme</label>
-            <select id="codeThemeSelect">
-                <option value="monokai">Monokai</option>
-                <option value="dracula">Dracula</option>
-                <option value="solarized-dark">Solarized Dark</option>
-                <option value="github-dark">GitHub Dark</option>
-                <option value="one-dark">One Dark</option>
-                <option value="tomorrow-night">Tomorrow Night</option>
-            </select>
-        </div>
+    <!-- Header -->
+    <div class="popup-header">
+      <img src="../../assets/icon_128_128.png" id="popUpLogo" alt="FetchCodes Logo">
+      <div>
+        <h2 class="popUpNamePlate">
+          CF <span id="popUpNameFetch">Fetch</span><span id="popUpNameCodes">Codes</span>
+        </h2>
+        <p class="popup-subtitle">Accepted Codes & AI Explainer</p>
+      </div>
     </div>
 
-    <div class="ai-settings-container">
-        
-        <div class="input-group">
-            <label for="apiKeyInput">🔑 Gemini API Key</label>
-            <input type="password" id="apiKeyInput" placeholder="Paste Key Here">
-        </div>
+    <!-- Dark Mode Section -->
+    <div class="settings-card dark-mode-card">
+      <h3 class="card-title">🌙 Appearance</h3>
 
-        <div class="input-group">
-            <label for="modelInput">🤖 AI Model (e.g. gemini-2.5-flash)</label>
-            <input type="text" id="modelInput" placeholder="gemini-2.5-flash">
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-text">Problem Page</span>
+          <span class="toggle-desc">Dark mode for entire page</span>
         </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="pageDarkToggle">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+        </label>
+      </div>
 
-        <div class="input-group">
-            <label for="fullPromptInput">📝 Full Code Prompt</label>
-            <textarea id="fullPromptInput" placeholder="Ex: Explain time complexity..."></textarea>
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-text">Code Only</span>
+          <span class="toggle-desc">Dark mode for code blocks</span>
         </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="codeDarkToggle">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+        </label>
+      </div>
 
-        <div class="input-group">
-            <label for="snippetPromptInput">✂️ Snippet Prompt</label>
-            <textarea id="snippetPromptInput" placeholder="Ex: Explain syntax..."></textarea>
+      <div class="theme-select-wrapper" id="themeSelectGroup" style="display: none;">
+        <label for="codeThemeSelect" class="select-label">🎨 Code Theme</label>
+        <div class="select-wrapper">
+          <select id="codeThemeSelect">
+            <option value="monokai">Monokai</option>
+            <option value="dracula">Dracula</option>
+            <option value="solarized-dark">Solarized Dark</option>
+            <option value="github-dark">GitHub Dark</option>
+            <option value="one-dark">One Dark</option>
+            <option value="tomorrow-night">Tomorrow Night</option>
+          </select>
         </div>
-
-        <button id="saveBtn">Save AI Settings</button>
-        <div id="status"></div>
+      </div>
     </div>
 
+    <!-- AI Settings Section -->
+    <div class="settings-card ai-card">
+      <h3 class="card-title">🤖 AI Settings</h3>
+
+      <div class="input-group">
+        <label for="apiKeyInput">🔑 Gemini API Key</label>
+        <input type="password" id="apiKeyInput" placeholder="Paste your API key here">
+      </div>
+
+      <div class="input-group">
+        <label for="modelInput">Model Name</label>
+        <input type="text" id="modelInput" placeholder="gemini-2.5-flash">
+      </div>
+
+      <div class="input-group">
+        <label for="fullPromptInput">📝 Full Code Prompt</label>
+        <textarea id="fullPromptInput" placeholder="Ex: Explain time complexity..."></textarea>
+      </div>
+
+      <div class="input-group">
+        <label for="snippetPromptInput">✂️ Snippet Prompt</label>
+        <textarea id="snippetPromptInput" placeholder="Ex: Explain syntax..."></textarea>
+      </div>
+
+      <button id="saveBtn">💾 Save Settings</button>
+      <div id="status"></div>
+    </div>
+
+    <!-- Developer Section -->
     <div class="developer-section">
       <span id="developerContact" title="Open GitHub Profile">Developed by</span>
       <button id="developerHandle" title="Open Codeforces Profile">sapaul</button>

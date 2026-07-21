@@ -1,239 +1,336 @@
-/* Importing Google Font of Balthazar */
-@import url('https://fonts.googleapis.com/css2?family=Balthazar&display=swap');
+/* =============================================================================
+   CF FETCHCODES — Popup Stylesheet (Modern Dark Theme)
+   =============================================================================
+   All styles scoped under .popUpContainer to prevent leaking into CF pages,
+   since this CSS is injected as a content script.
+   ============================================================================= */
 
-/* PopUp Content Container */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
+/* ===========================
+   BASE CONTAINER
+   =========================== */
 .popUpContainer {
-  width: 18rem; 
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-family: 'Balthazar', serif;
-  background-color: #fff;
+    width: 320px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(160deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+    color: #e0e0e0;
 }
 
-/* Name Plate Design */
-.popUpNamePlate {
-  font-size: 1.8rem;
-  margin: 5px 0 10px 0;
-  font-weight: bold;
-}
-
-#popUpNameFetch { color: #000001; }
-#popUpNameCodes { color: #425E9D; }
-
-#popUpLogo {
-  width: 4rem;
-  margin-bottom: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 /* ===========================
-   AI SETTINGS STYLES
+   HEADER
    =========================== */
-.ai-settings-container {
-  width: 100%;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
-  margin: 10px 0;
-  text-align: left;
+.popUpContainer .popup-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.input-group {
-  margin-bottom: 10px;
+.popUpContainer #popUpLogo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.input-group label {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #333;
-  display: block;
-  margin-bottom: 4px;
+.popUpContainer .popUpNamePlate {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
 }
 
-/* UPDATED: Added input[type="text"] to style the Model Name input */
-input[type="password"], 
-input[type="text"],
-textarea {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box; 
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-family: sans-serif; 
-  font-size: 0.85rem;
-  resize: vertical;
+.popUpContainer #popUpNameFetch { color: #ffffff; }
+.popUpContainer #popUpNameCodes { color: #6bb5ff; }
+
+.popUpContainer .popup-subtitle {
+    font-size: 0.7rem;
+    color: #666;
+    margin: 2px 0 0 0;
+    font-weight: 400;
+    letter-spacing: 0.3px;
 }
 
-textarea { height: 50px; }
-
-input:focus, textarea:focus {
-  outline: none;
-  border-color: #425E9D;
-}
-
-#saveBtn {
-  width: 100%;
-  background-color: #425E9D; 
-  color: white;
-  border: none;
-  padding: 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: 'Balthazar', serif;
-  font-size: 1rem;
-  transition: background 0.2s;
-}
-
-#saveBtn:hover { background-color: #314675; }
-
-#status {
-  height: 20px;
-  margin-top: 5px;
-  font-size: 0.8rem;
-  color: #00a65a;
-  text-align: center;
-  font-weight: bold;
-}
 
 /* ===========================
-   DEVELOPER SECTION (FIXED)
+   SETTINGS CARDS
    =========================== */
-.developer-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px; /* Space between "Developed by" and "sapaul" */
-  margin-top: 5px;
-  font-weight: 500;
-  font-size: 1.1rem;
+.popUpContainer .settings-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    padding: 14px;
+    transition: border-color 0.3s;
 }
 
-/* The text "Developed by" -> Triggers GitHub */
-#developerContact {
-  cursor: pointer;
-  color: #000;
-  transition: color 0.2s;
-}
-#developerContact:hover {
-  color: #555;
-  text-decoration: underline;
+.popUpContainer .settings-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
 }
 
-/* The handle "sapaul" -> Triggers Codeforces */
-#developerHandle {
-  text-decoration: none;
-  border: none;
-  background: none;
-  color: blue;
-  font-weight: 600;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.1rem;
-  cursor: pointer;
-  padding: 0;
+.popUpContainer .card-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #888;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
-#developerHandle:hover {
-  text-decoration: underline;
-}
 
 /* ===========================
-   DARK MODE SETTINGS
+   TOGGLE SWITCHES
    =========================== */
-.dark-mode-settings-container {
-  width: 100%;
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
-  margin-bottom: 10px;
-  text-align: left;
+.popUpContainer .toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
 }
 
-.section-title {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
-  margin: 0 0 10px 0;
+.popUpContainer .toggle-row + .toggle-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.toggle-group {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+.popUpContainer .toggle-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
-.toggle-label {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #333;
+.popUpContainer .toggle-text {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #d0d0d0;
 }
 
-/* Modern Toggle Switch */
-.toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 42px;
-  height: 22px;
+.popUpContainer .toggle-desc {
+    font-size: 0.7rem;
+    color: #555;
+    font-weight: 400;
 }
 
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+.popUpContainer .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
-.toggle-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 22px;
-  transition: 0.3s;
+.popUpContainer .toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-.toggle-slider:before {
-  content: "";
-  position: absolute;
-  height: 16px;
-  width: 16px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  border-radius: 50%;
-  transition: 0.3s;
+.popUpContainer .toggle-track {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 22px;
+    transition: all 0.3s ease;
 }
 
-.toggle-switch input:checked + .toggle-slider {
-  background-color: #425E9D;
+.popUpContainer .toggle-thumb {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background: #555;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.toggle-switch input:checked + .toggle-slider:before {
-  transform: translateX(20px);
+.popUpContainer .toggle-switch input:checked + .toggle-track {
+    background: linear-gradient(135deg, #3b5fad, #6bb5ff);
+    box-shadow: 0 0 10px rgba(107, 181, 255, 0.25);
 }
 
-/* Theme Dropdown */
-#codeThemeSelect {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-family: sans-serif;
-  font-size: 0.85rem;
-  background-color: #fff;
-  cursor: pointer;
-  appearance: auto;
+.popUpContainer .toggle-switch input:checked + .toggle-track .toggle-thumb {
+    transform: translateX(18px);
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-#codeThemeSelect:focus {
-  outline: none;
-  border-color: #425E9D;
+
+/* ===========================
+   THEME DROPDOWN
+   =========================== */
+.popUpContainer .theme-select-wrapper {
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    animation: fadeSlideIn 0.25s ease-out;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.popUpContainer .select-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #888;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.popUpContainer #codeThemeSelect {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #d0d0d0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.83rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: auto;
+}
+
+.popUpContainer #codeThemeSelect:focus {
+    border-color: #6bb5ff;
+    box-shadow: 0 0 0 2px rgba(107, 181, 255, 0.15);
+}
+
+.popUpContainer #codeThemeSelect option {
+    background: #1a1a2e;
+    color: #d0d0d0;
+}
+
+
+/* ===========================
+   INPUT GROUPS (AI Settings)
+   =========================== */
+.popUpContainer .input-group {
+    margin-bottom: 10px;
+}
+
+.popUpContainer .input-group label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #888;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.popUpContainer input[type="password"],
+.popUpContainer input[type="text"],
+.popUpContainer textarea {
+    width: 100%;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.05);
+    color: #d0d0d0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.83rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+}
+
+.popUpContainer textarea { height: 48px; }
+
+.popUpContainer input:focus,
+.popUpContainer textarea:focus {
+    outline: none;
+    border-color: #6bb5ff;
+    box-shadow: 0 0 0 2px rgba(107, 181, 255, 0.15);
+}
+
+
+/* ===========================
+   SAVE BUTTON
+   =========================== */
+.popUpContainer #saveBtn {
+    width: 100%;
+    padding: 9px;
+    background: linear-gradient(135deg, #3b5fad 0%, #5a80d0 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.83rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+}
+
+.popUpContainer #saveBtn:hover {
+    background: linear-gradient(135deg, #4a6fc0 0%, #6b90e0 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 95, 173, 0.35);
+}
+
+.popUpContainer #saveBtn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.popUpContainer #status {
+    height: 18px;
+    margin-top: 4px;
+    font-size: 0.78rem;
+    color: #4ade80;
+    text-align: center;
+    font-weight: 500;
+}
+
+
+/* ===========================
+   DEVELOPER SECTION
+   =========================== */
+.popUpContainer .developer-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.75rem;
+}
+
+.popUpContainer #developerContact {
+    cursor: pointer;
+    color: #555;
+    transition: color 0.2s;
+}
+
+.popUpContainer #developerContact:hover {
+    color: #888;
+    text-decoration: underline;
+}
+
+.popUpContainer #developerHandle {
+    text-decoration: none;
+    border: none;
+    background: none;
+    color: #6bb5ff;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.popUpContainer #developerHandle:hover {
+    text-decoration: underline;
+    color: #8ecaff;
 }
