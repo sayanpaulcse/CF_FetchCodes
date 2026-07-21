@@ -43,6 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const saveBtn = document.getElementById('saveBtn');
     const status = document.getElementById('status');
 
+    const pageDarkToggle = document.getElementById('pageDarkToggle');
+    const codeDarkToggle = document.getElementById('codeDarkToggle');
+    const codeThemeSelect = document.getElementById('codeThemeSelect');
+    const themeSelectGroup = document.getElementById('themeSelectGroup');
+
     // 1. Load Saved Settings (or Defaults)
     chrome.storage.local.get(['geminiApiKey', 'geminiModel', 'cfFullPrompt', 'cfSnippetPrompt'], (res) => {
         if (res.geminiApiKey) {
@@ -54,6 +59,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         fullPromptInput.value = res.cfFullPrompt || DEFAULTS.fullPrompt;
         snippetPromptInput.value = res.cfSnippetPrompt || DEFAULTS.snippetPrompt;
+    });
+
+    // Load Dark Mode Settings
+    chrome.storage.local.get(['cfPageDarkMode', 'cfCodeDarkMode', 'cfCodeTheme'], (res) => {
+        pageDarkToggle.checked = !!res.cfPageDarkMode;
+        codeDarkToggle.checked = !!res.cfCodeDarkMode;
+        codeThemeSelect.value = res.cfCodeTheme || 'monokai';
+        themeSelectGroup.style.display = codeDarkToggle.checked ? 'block' : 'none';
     });
 
     // 2. Save Settings on Click
@@ -75,6 +88,26 @@ document.addEventListener('DOMContentLoaded', function () {
                     status.innerText = "";
                 }, 2000);
             });
+        });
+    }
+
+    // --- Part C: Dark Mode Toggle Handlers ---
+    if (pageDarkToggle) {
+        pageDarkToggle.addEventListener('change', () => {
+            chrome.storage.local.set({ cfPageDarkMode: pageDarkToggle.checked });
+        });
+    }
+
+    if (codeDarkToggle) {
+        codeDarkToggle.addEventListener('change', () => {
+            chrome.storage.local.set({ cfCodeDarkMode: codeDarkToggle.checked });
+            themeSelectGroup.style.display = codeDarkToggle.checked ? 'block' : 'none';
+        });
+    }
+
+    if (codeThemeSelect) {
+        codeThemeSelect.addEventListener('change', () => {
+            chrome.storage.local.set({ cfCodeTheme: codeThemeSelect.value });
         });
     }
 });

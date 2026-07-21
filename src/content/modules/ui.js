@@ -20,13 +20,78 @@ const UI = {
     progressTextId: 'cf_progress_text',
 
     /**
-     * Initialize all UI components: sidebar box, modal, and event listeners.
+     * Initialize all UI components: sidebar box, modal, event listeners,
+     * and dark mode settings.
      */
     init: () => {
         UI.injectSidebarBox();
         UI.injectModal();
         UI.setupEventListeners();
         UI.setupContextListeners();
+        UI.initDarkMode();
+    },
+
+    /**
+     * Load dark mode preferences from storage and apply them.
+     * Also sets up a listener for live changes from the popup.
+     */
+    initDarkMode: () => {
+        chrome.storage.local.get(['cfPageDarkMode', 'cfCodeDarkMode', 'cfCodeTheme'], (res) => {
+            UI.applyDarkMode(res);
+        });
+        UI.setupDarkModeListener();
+    },
+
+    /**
+     * Apply dark mode settings by setting data attributes on the <html> element.
+     * CSS rules in content.css and code-themes.css are scoped to these attributes.
+     * @param {Object} settings
+     * @param {boolean} [settings.cfPageDarkMode]
+     * @param {boolean} [settings.cfCodeDarkMode]
+     * @param {string} [settings.cfCodeTheme]
+     */
+    applyDarkMode: (settings) => {
+        const root = document.documentElement;
+
+        // Page dark mode
+        if (settings.cfPageDarkMode) {
+            root.setAttribute('data-cf-dark', 'true');
+        } else {
+            root.removeAttribute('data-cf-dark');
+        }
+
+        // Code-only dark mode
+        if (settings.cfCodeDarkMode) {
+            root.setAttribute('data-cf-code-dark', 'true');
+        } else {
+            root.removeAttribute('data-cf-code-dark');
+        }
+
+        // Code theme (always set so theme CSS activates when code dark mode is on)
+        const theme = settings.cfCodeTheme || 'monokai';
+        if (settings.cfCodeDarkMode) {
+            root.setAttribute('data-cf-code-theme', theme);
+        } else {
+            root.removeAttribute('data-cf-code-theme');
+        }
+    },
+
+    /**
+     * Listen for chrome.storage changes so dark mode toggles in the popup
+     * take effect immediately without requiring a page reload.
+     */
+    setupDarkModeListener: () => {
+        chrome.storage.onChanged.addListener((changes, area) => {
+            if (area !== 'local') return;
+            const darkKeys = ['cfPageDarkMode', 'cfCodeDarkMode', 'cfCodeTheme'];
+            const hasRelevantChange = darkKeys.some(key => key in changes);
+            if (!hasRelevantChange) return;
+
+            // Re-read all settings to ensure consistency
+            chrome.storage.local.get(darkKeys, (res) => {
+                UI.applyDarkMode(res);
+            });
+        });
     },
 
     /**

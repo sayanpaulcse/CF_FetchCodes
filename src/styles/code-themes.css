@@ -1,0 +1,189 @@
+/* =============================================================================
+   CF FETCHCODES — Code Themes for Google Code Prettify
+   =============================================================================
+   Themes are activated by data attributes on <html>:
+     - data-cf-code-dark="true"  → enables dark code background
+     - data-cf-code-theme="X"   → selects syntax color scheme
+   
+   Supported themes: monokai, dracula, solarized-dark, github-dark,
+                     one-dark, tomorrow-night
+   ============================================================================= */
+
+
+/* =============================================================================
+   1. CODE-ONLY DARK MODE BASE
+   Applied when user enables "Code Only" dark mode toggle.
+   Darkens code containers without affecting the rest of the page.
+   ============================================================================= */
+[data-cf-code-dark="true"] .accordion-content .prettyprint,
+[data-cf-code-dark="true"] .accordion-content pre.prettyprint {
+    background-color: #272822 !important;
+    color: #f8f8f2 !important;
+    border: none !important;
+}
+
+[data-cf-code-dark="true"] .accordion-content .cf-code-toolbar {
+    background: #1e1e1e !important;
+    border-bottom-color: #333 !important;
+}
+
+[data-cf-code-dark="true"] .accordion-content .cf-code-toolbar .cf-btn-view-original {
+    color: #6bb5ff !important;
+}
+
+[data-cf-code-dark="true"] .accordion-content .cf-code-toolbar .cf-btn-explain {
+    background: linear-gradient(45deg, #7c3aed, #3b82f6) !important;
+}
+
+/* Line number backgrounds for dark mode */
+[data-cf-code-dark="true"] .accordion-content li.L1,
+[data-cf-code-dark="true"] .accordion-content li.L3,
+[data-cf-code-dark="true"] .accordion-content li.L5,
+[data-cf-code-dark="true"] .accordion-content li.L7,
+[data-cf-code-dark="true"] .accordion-content li.L9 {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+
+/* =============================================================================
+   2. MONOKAI THEME (Default)
+   Classic dark theme inspired by Sublime Text's Monokai
+   ============================================================================= */
+[data-cf-code-theme="monokai"] .accordion-content pre.prettyprint {
+    background-color: #272822 !important;
+    color: #f8f8f2 !important;
+}
+[data-cf-code-theme="monokai"] .accordion-content .pln { color: #f8f8f2 !important; }
+[data-cf-code-theme="monokai"] .accordion-content .str { color: #e6db74 !important; }
+[data-cf-code-theme="monokai"] .accordion-content .kwd { color: #f92672 !important; }
+[data-cf-code-theme="monokai"] .accordion-content .com { color: #75715e !important; font-style: italic; }
+[data-cf-code-theme="monokai"] .accordion-content .typ { color: #66d9ef !important; }
+[data-cf-code-theme="monokai"] .accordion-content .lit { color: #ae81ff !important; }
+[data-cf-code-theme="monokai"] .accordion-content .pun,
+[data-cf-code-theme="monokai"] .accordion-content .opn,
+[data-cf-code-theme="monokai"] .accordion-content .clo { color: #f8f8f2 !important; }
+[data-cf-code-theme="monokai"] .accordion-content .tag { color: #f92672 !important; }
+[data-cf-code-theme="monokai"] .accordion-content .atn { color: #a6e22e !important; }
+[data-cf-code-theme="monokai"] .accordion-content .atv { color: #e6db74 !important; }
+[data-cf-code-theme="monokai"] .accordion-content .dec { color: #ae81ff !important; }
+[data-cf-code-theme="monokai"] .accordion-content .fun { color: #a6e22e !important; }
+
+
+/* =============================================================================
+   3. DRACULA THEME
+   Popular purple-toned dark theme with vibrant accent colors
+   ============================================================================= */
+[data-cf-code-theme="dracula"] .accordion-content pre.prettyprint {
+    background-color: #282a36 !important;
+    color: #f8f8f2 !important;
+}
+[data-cf-code-theme="dracula"] .accordion-content .pln { color: #f8f8f2 !important; }
+[data-cf-code-theme="dracula"] .accordion-content .str { color: #f1fa8c !important; }
+[data-cf-code-theme="dracula"] .accordion-content .kwd { color: #ff79c6 !important; }
+[data-cf-code-theme="dracula"] .accordion-content .com { color: #6272a4 !important; font-style: italic; }
+[data-cf-code-theme="dracula"] .accordion-content .typ { color: #8be9fd !important; }
+[data-cf-code-theme="dracula"] .accordion-content .lit { color: #bd93f9 !important; }
+[data-cf-code-theme="dracula"] .accordion-content .pun,
+[data-cf-code-theme="dracula"] .accordion-content .opn,
+[data-cf-code-theme="dracula"] .accordion-content .clo { color: #f8f8f2 !important; }
+[data-cf-code-theme="dracula"] .accordion-content .tag { color: #ff79c6 !important; }
+[data-cf-code-theme="dracula"] .accordion-content .atn { color: #50fa7b !important; }
+[data-cf-code-theme="dracula"] .accordion-content .atv { color: #f1fa8c !important; }
+[data-cf-code-theme="dracula"] .accordion-content .dec { color: #bd93f9 !important; }
+[data-cf-code-theme="dracula"] .accordion-content .fun { color: #50fa7b !important; }
+
+
+/* =============================================================================
+   4. SOLARIZED DARK THEME
+   Ethan Schoonover's precision-crafted, low-contrast dark palette
+   ============================================================================= */
+[data-cf-code-theme="solarized-dark"] .accordion-content pre.prettyprint {
+    background-color: #002b36 !important;
+    color: #839496 !important;
+}
+[data-cf-code-theme="solarized-dark"] .accordion-content .pln { color: #839496 !important; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .str { color: #2aa198 !important; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .kwd { color: #859900 !important; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .com { color: #586e75 !important; font-style: italic; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .typ { color: #b58900 !important; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .lit { color: #d33682 !important; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .pun,
+[data-cf-code-theme="solarized-dark"] .accordion-content .opn,
+[data-cf-code-theme="solarized-dark"] .accordion-content .clo { color: #93a1a1 !important; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .tag { color: #268bd2 !important; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .atn { color: #b58900 !important; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .atv { color: #2aa198 !important; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .dec { color: #d33682 !important; }
+[data-cf-code-theme="solarized-dark"] .accordion-content .fun { color: #268bd2 !important; }
+
+
+/* =============================================================================
+   5. GITHUB DARK THEME
+   GitHub's official dark mode code styling
+   ============================================================================= */
+[data-cf-code-theme="github-dark"] .accordion-content pre.prettyprint {
+    background-color: #0d1117 !important;
+    color: #c9d1d9 !important;
+}
+[data-cf-code-theme="github-dark"] .accordion-content .pln { color: #c9d1d9 !important; }
+[data-cf-code-theme="github-dark"] .accordion-content .str { color: #a5d6ff !important; }
+[data-cf-code-theme="github-dark"] .accordion-content .kwd { color: #ff7b72 !important; }
+[data-cf-code-theme="github-dark"] .accordion-content .com { color: #8b949e !important; font-style: italic; }
+[data-cf-code-theme="github-dark"] .accordion-content .typ { color: #d2a8ff !important; }
+[data-cf-code-theme="github-dark"] .accordion-content .lit { color: #79c0ff !important; }
+[data-cf-code-theme="github-dark"] .accordion-content .pun,
+[data-cf-code-theme="github-dark"] .accordion-content .opn,
+[data-cf-code-theme="github-dark"] .accordion-content .clo { color: #c9d1d9 !important; }
+[data-cf-code-theme="github-dark"] .accordion-content .tag { color: #7ee787 !important; }
+[data-cf-code-theme="github-dark"] .accordion-content .atn { color: #d2a8ff !important; }
+[data-cf-code-theme="github-dark"] .accordion-content .atv { color: #a5d6ff !important; }
+[data-cf-code-theme="github-dark"] .accordion-content .dec { color: #ff7b72 !important; }
+[data-cf-code-theme="github-dark"] .accordion-content .fun { color: #d2a8ff !important; }
+
+
+/* =============================================================================
+   6. ONE DARK THEME
+   Atom editor's iconic dark theme
+   ============================================================================= */
+[data-cf-code-theme="one-dark"] .accordion-content pre.prettyprint {
+    background-color: #282c34 !important;
+    color: #abb2bf !important;
+}
+[data-cf-code-theme="one-dark"] .accordion-content .pln { color: #abb2bf !important; }
+[data-cf-code-theme="one-dark"] .accordion-content .str { color: #98c379 !important; }
+[data-cf-code-theme="one-dark"] .accordion-content .kwd { color: #c678dd !important; }
+[data-cf-code-theme="one-dark"] .accordion-content .com { color: #5c6370 !important; font-style: italic; }
+[data-cf-code-theme="one-dark"] .accordion-content .typ { color: #e5c07b !important; }
+[data-cf-code-theme="one-dark"] .accordion-content .lit { color: #d19a66 !important; }
+[data-cf-code-theme="one-dark"] .accordion-content .pun,
+[data-cf-code-theme="one-dark"] .accordion-content .opn,
+[data-cf-code-theme="one-dark"] .accordion-content .clo { color: #abb2bf !important; }
+[data-cf-code-theme="one-dark"] .accordion-content .tag { color: #e06c75 !important; }
+[data-cf-code-theme="one-dark"] .accordion-content .atn { color: #d19a66 !important; }
+[data-cf-code-theme="one-dark"] .accordion-content .atv { color: #98c379 !important; }
+[data-cf-code-theme="one-dark"] .accordion-content .dec { color: #d19a66 !important; }
+[data-cf-code-theme="one-dark"] .accordion-content .fun { color: #61afef !important; }
+
+
+/* =============================================================================
+   7. TOMORROW NIGHT THEME
+   Chris Kempson's Tomorrow Night with pastel colors
+   ============================================================================= */
+[data-cf-code-theme="tomorrow-night"] .accordion-content pre.prettyprint {
+    background-color: #1d1f21 !important;
+    color: #c5c8c6 !important;
+}
+[data-cf-code-theme="tomorrow-night"] .accordion-content .pln { color: #c5c8c6 !important; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .str { color: #b5bd68 !important; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .kwd { color: #b294bb !important; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .com { color: #969896 !important; font-style: italic; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .typ { color: #f0c674 !important; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .lit { color: #de935f !important; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .pun,
+[data-cf-code-theme="tomorrow-night"] .accordion-content .opn,
+[data-cf-code-theme="tomorrow-night"] .accordion-content .clo { color: #c5c8c6 !important; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .tag { color: #cc6666 !important; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .atn { color: #de935f !important; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .atv { color: #b5bd68 !important; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .dec { color: #de935f !important; }
+[data-cf-code-theme="tomorrow-night"] .accordion-content .fun { color: #81a2be !important; }

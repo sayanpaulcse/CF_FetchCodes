@@ -766,3 +766,371 @@
         transform: translateX(40px);
     }
 }
+
+
+/* =============================================================================
+   16. PROBLEM PAGE DARK MODE
+   =============================================================================
+   Activated by data-cf-dark="true" on <html>.
+   Overrides Codeforces page elements + all extension-injected UI.
+   ============================================================================= */
+
+/* Dark Mode CSS Variables */
+[data-cf-dark="true"] {
+    --cf-dark-bg: #1a1a2e;
+    --cf-dark-surface: #16213e;
+    --cf-dark-surface-alt: #1b2838;
+    --cf-dark-text: #e0e0e0;
+    --cf-dark-text-muted: #a0a0a0;
+    --cf-dark-border: #2a3a4a;
+    --cf-dark-primary: #6bb5ff;
+    --cf-dark-hover: #253550;
+}
+
+/* --- Codeforces Page Base --- */
+[data-cf-dark="true"] body {
+    background-color: var(--cf-dark-bg) !important;
+    color: var(--cf-dark-text) !important;
+}
+
+[data-cf-dark="true"] #pageContent,
+[data-cf-dark="true"] #body,
+[data-cf-dark="true"] .content-with-sidebar {
+    background-color: var(--cf-dark-bg) !important;
+}
+
+/* --- Page Header & Footer --- */
+[data-cf-dark="true"] #header,
+[data-cf-dark="true"] #footer,
+[data-cf-dark="true"] .second-level-menu,
+[data-cf-dark="true"] .lang-chooser,
+[data-cf-dark="true"] .menu-list,
+[data-cf-dark="true"] .menu-list-container {
+    background-color: var(--cf-dark-surface) !important;
+    color: var(--cf-dark-text) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] #header a,
+[data-cf-dark="true"] #footer a,
+[data-cf-dark="true"] .second-level-menu a,
+[data-cf-dark="true"] .menu-list a {
+    color: var(--cf-dark-primary) !important;
+}
+
+/* --- Sidebar --- */
+[data-cf-dark="true"] #sidebar {
+    background-color: var(--cf-dark-bg) !important;
+}
+
+[data-cf-dark="true"] #sidebar .roundbox,
+[data-cf-dark="true"] #sidebar .sidebox {
+    background-color: var(--cf-dark-surface) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] #sidebar .caption {
+    background-color: var(--cf-dark-surface-alt) !important;
+    color: var(--cf-dark-text) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] #sidebar a,
+[data-cf-dark="true"] #sidebar .sidebar-link {
+    color: var(--cf-dark-primary) !important;
+}
+
+/* --- Roundboxes / Cards --- */
+[data-cf-dark="true"] .roundbox {
+    background-color: var(--cf-dark-surface) !important;
+    border-color: var(--cf-dark-border) !important;
+    color: var(--cf-dark-text) !important;
+}
+
+[data-cf-dark="true"] .titled {
+    background-color: var(--cf-dark-surface-alt) !important;
+    color: var(--cf-dark-text) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+/* --- Problem Statement --- */
+[data-cf-dark="true"] .problem-statement {
+    color: var(--cf-dark-text) !important;
+}
+
+[data-cf-dark="true"] .problem-statement .header .title {
+    color: #fff !important;
+}
+
+[data-cf-dark="true"] .problem-statement .section-title {
+    color: var(--cf-dark-primary) !important;
+}
+
+[data-cf-dark="true"] .problem-statement .input-specification,
+[data-cf-dark="true"] .problem-statement .output-specification,
+[data-cf-dark="true"] .problem-statement .sample-tests,
+[data-cf-dark="true"] .problem-statement .note {
+    color: var(--cf-dark-text) !important;
+}
+
+[data-cf-dark="true"] .problem-statement pre {
+    background-color: var(--cf-dark-surface-alt) !important;
+    color: var(--cf-dark-text) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .problem-statement .sample-test .input,
+[data-cf-dark="true"] .problem-statement .sample-test .output {
+    background-color: var(--cf-dark-surface-alt) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .problem-statement .sample-test .input .title,
+[data-cf-dark="true"] .problem-statement .sample-test .output .title {
+    color: var(--cf-dark-primary) !important;
+}
+
+/* --- Tables --- */
+[data-cf-dark="true"] table,
+[data-cf-dark="true"] table td,
+[data-cf-dark="true"] table th {
+    border-color: var(--cf-dark-border) !important;
+    color: var(--cf-dark-text) !important;
+}
+
+[data-cf-dark="true"] table th {
+    background-color: var(--cf-dark-surface-alt) !important;
+}
+
+[data-cf-dark="true"] table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* --- Links --- */
+[data-cf-dark="true"] a {
+    color: var(--cf-dark-primary) !important;
+}
+
+[data-cf-dark="true"] a:visited {
+    color: #9f8fff !important;
+}
+
+/* --- MathJax --- */
+[data-cf-dark="true"] .MathJax,
+[data-cf-dark="true"] .MathJax_Display {
+    color: var(--cf-dark-text) !important;
+}
+
+/* --- Input/Textarea --- */
+[data-cf-dark="true"] input,
+[data-cf-dark="true"] textarea,
+[data-cf-dark="true"] select {
+    background-color: var(--cf-dark-surface-alt) !important;
+    color: var(--cf-dark-text) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+
+/* =============================================================================
+   17. MODAL DARK MODE (Page Dark Mode)
+   ============================================================================= */
+[data-cf-dark="true"] .modalContent {
+    background-color: var(--cf-dark-surface) !important;
+}
+
+[data-cf-dark="true"] .modalHeaderContainer {
+    background-color: var(--cf-dark-surface) !important;
+    border-bottom-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .modalCodeHeader {
+    color: var(--cf-dark-primary) !important;
+}
+
+[data-cf-dark="true"] .modalClose {
+    color: var(--cf-dark-text-muted) !important;
+}
+
+[data-cf-dark="true"] .modalClose:hover {
+    color: #ff6b6b !important;
+}
+
+[data-cf-dark="true"] .progress-info {
+    color: var(--cf-dark-text-muted) !important;
+}
+
+[data-cf-dark="true"] .progress-track {
+    background-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] #cf_friends_list_container {
+    background-color: var(--cf-dark-bg) !important;
+}
+
+/* --- Accordion Dark --- */
+[data-cf-dark="true"] .accordion-item {
+    background: var(--cf-dark-surface) !important;
+    border-color: var(--cf-dark-border) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-cf-dark="true"] .accordion-header:hover {
+    background-color: var(--cf-dark-hover) !important;
+}
+
+[data-cf-dark="true"] .accordion-header.active {
+    background-color: var(--cf-dark-surface-alt) !important;
+    border-bottom-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .friend-status-info {
+    color: var(--cf-dark-text-muted) !important;
+}
+
+[data-cf-dark="true"] .accordion-content {
+    background-color: var(--cf-dark-surface) !important;
+}
+
+/* --- Code Toolbar Dark --- */
+[data-cf-dark="true"] .cf-code-toolbar {
+    background: var(--cf-dark-surface-alt) !important;
+    border-bottom-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .cf-btn-view-original {
+    color: var(--cf-dark-primary) !important;
+}
+
+/* --- Status Banners Dark --- */
+[data-cf-dark="true"] .cf-status-banner--error {
+    background: rgba(224, 108, 117, 0.1) !important;
+    border-color: rgba(224, 108, 117, 0.3) !important;
+}
+
+[data-cf-dark="true"] .cf-status-banner--error .cf-status-banner__subtitle {
+    color: var(--cf-dark-text-muted) !important;
+}
+
+[data-cf-dark="true"] .cf-status-banner--locked {
+    color: var(--cf-dark-text-muted) !important;
+    background: var(--cf-dark-surface-alt) !important;
+}
+
+[data-cf-dark="true"] .cf-status-banner--fallback {
+    color: var(--cf-dark-text-muted) !important;
+}
+
+[data-cf-dark="true"] .cf-btn-retry {
+    background: var(--cf-dark-surface-alt) !important;
+    color: var(--cf-dark-text) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .cf-btn-retry:hover {
+    background: var(--cf-dark-hover) !important;
+}
+
+[data-cf-dark="true"] .loading-spinner {
+    color: var(--cf-dark-primary) !important;
+}
+
+
+/* =============================================================================
+   18. AI CHAT WINDOW DARK MODE
+   ============================================================================= */
+[data-cf-dark="true"] .cf-ai-chat-window {
+    background: var(--cf-dark-surface) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .cf-ai-messages {
+    background: var(--cf-dark-bg) !important;
+}
+
+[data-cf-dark="true"] .cf-msg.user {
+    background: #1a3a5c !important;
+    color: #a8d4ff !important;
+}
+
+[data-cf-dark="true"] .cf-msg.model {
+    background: var(--cf-dark-surface-alt) !important;
+    color: var(--cf-dark-text) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .cf-msg.model b,
+[data-cf-dark="true"] .cf-msg.model strong {
+    color: #fff !important;
+}
+
+[data-cf-dark="true"] .cf-ai-input-area {
+    background: var(--cf-dark-surface) !important;
+    border-top-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .cf-ai-input-area textarea {
+    background: var(--cf-dark-surface-alt) !important;
+    color: var(--cf-dark-text) !important;
+    border-color: var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .cf-ai-input-area textarea:focus {
+    border-color: var(--cf-dark-primary) !important;
+}
+
+/* --- Markdown Code Blocks in Chat (Dark) --- */
+[data-cf-dark="true"] .md-code-wrapper {
+    border-color: var(--cf-dark-border) !important;
+    background-color: var(--cf-dark-surface-alt) !important;
+}
+
+[data-cf-dark="true"] .md-code-header {
+    background-color: #0d1117 !important;
+    border-bottom-color: var(--cf-dark-border) !important;
+    color: var(--cf-dark-text-muted) !important;
+}
+
+[data-cf-dark="true"] .copy-btn {
+    border-color: var(--cf-dark-border) !important;
+    color: var(--cf-dark-text-muted) !important;
+}
+
+[data-cf-dark="true"] .copy-btn:hover {
+    background-color: var(--cf-dark-hover) !important;
+    color: var(--cf-dark-text) !important;
+}
+
+[data-cf-dark="true"] .inline-code {
+    background: rgba(110, 118, 129, 0.3) !important;
+    color: #e0e0e0 !important;
+}
+
+[data-cf-dark="true"] .typing-indicator {
+    background: var(--cf-dark-surface-alt) !important;
+}
+
+[data-cf-dark="true"] .typing-indicator span {
+    background-color: var(--cf-dark-primary) !important;
+}
+
+
+/* =============================================================================
+   19. TOAST DARK MODE
+   ============================================================================= */
+[data-cf-dark="true"] .cf-toast--info {
+    background: #0d2137 !important;
+    color: #6bb5ff !important;
+    border-left-color: #3b82f6 !important;
+}
+
+[data-cf-dark="true"] .cf-toast--warn {
+    background: #2d2200 !important;
+    color: #fbbf24 !important;
+    border-left-color: #f59e0b !important;
+}
+
+[data-cf-dark="true"] .cf-toast--error {
+    background: #2d0f0f !important;
+    color: #f87171 !important;
+    border-left-color: #ef4444 !important;
+}
