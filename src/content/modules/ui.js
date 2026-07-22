@@ -222,15 +222,15 @@ const UI = {
         const listContainer = document.getElementById(UI.listContainerId);
 
         if (btn) btn.onclick = () => {
-            modal.style.display = "block";
+            modal.classList.add('show');
             // Trigger fetching on first click (startFetching is defined in main.js)
             if (typeof startFetching === 'function') startFetching();
         };
-        if (span) span.onclick = () => modal.style.display = "none";
+        if (span) span.onclick = () => modal.classList.remove('show');
 
-        // Close modal on backdrop click — uses addEventListener to avoid hijacking
+        // Close modal on backdrop click
         window.addEventListener('click', (event) => {
-            if (event.target === modal) modal.style.display = "none";
+            if (event.target === modal) modal.classList.remove('show');
         });
 
         if (listContainer) {

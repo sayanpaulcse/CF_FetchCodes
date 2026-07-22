@@ -24,7 +24,9 @@
    1. MODAL OVERLAY & CONTAINER
    ============================================================================= */
 #cf_friends_modal {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
     position: fixed;
     z-index: 9999;
     left: 0;
@@ -33,6 +35,11 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(3px);
+}
+
+#cf_friends_modal.show {
+    visibility: visible;
+    opacity: 1;
 }
 
 .modalContent {
@@ -48,6 +55,12 @@
     flex-direction: column;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    transform: scale(0.95) translateY(-10px);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#cf_friends_modal.show .modalContent {
+    transform: scale(1) translateY(0);
 }
 
 .modalClose {
@@ -362,7 +375,7 @@
     border-radius: 12px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
-    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1), min-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .cf-ai-chat-window.window-minimized {
