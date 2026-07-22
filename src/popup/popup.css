@@ -1,0 +1,143 @@
+/* Importing Google Font of Balthazar */
+@import url('https://fonts.googleapis.com/css2?family=Balthazar&display=swap');
+
+/* PopUp Content Container */
+.popUpContainer {
+  width: 18rem; 
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: 'Balthazar', serif;
+  background-color: #fff;
+}
+
+/* Name Plate Design */
+.popUpNamePlate {
+  font-size: 1.8rem;
+  margin: 5px 0 10px 0;
+  font-weight: bold;
+}
+
+#popUpNameFetch { color: #000001; }
+#popUpNameCodes { color: #425E9D; }
+
+#popUpLogo {
+  width: 4rem;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===========================
+   AI SETTINGS STYLES
+   =========================== */
+.ai-settings-container {
+  width: 100%;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* UPDATED: Added input[type="text"] to style the Model Name input */
+input[type="password"], 
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: sans-serif; 
+  font-size: 0.85rem;
+  resize: vertical;
+}
+
+textarea { height: 50px; }
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #425E9D;
+}
+
+#saveBtn {
+  width: 100%;
+  background-color: #425E9D; 
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Balthazar', serif;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+#saveBtn:hover { background-color: #314675; }
+
+#status {
+  height: 20px;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: #00a65a;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ===========================
+   DEVELOPER SECTION (FIXED)
+   =========================== */
+.developer-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px; /* Space between "Developed by" and "sapaul" */
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* The text "Developed by" -> Triggers GitHub */
+#developerContact {
+  cursor: pointer;
+  color: #000;
+  transition: color 0.2s;
+}
+#developerContact:hover {
+  color: #555;
+  text-decoration: underline;
+}
+
+/* The handle "sapaul" -> Triggers Codeforces */
+#developerHandle {
+  text-decoration: none;
+  border: none;
+  background: none;
+  color: blue;
+  font-weight: 600;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+#developerHandle:hover {
+  text-decoration: underline;
+}

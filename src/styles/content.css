@@ -1,0 +1,768 @@
+/* =============================================================================
+   CF FETCHCODES — ContentFriends Stylesheet
+   =============================================================================
+   TABLE OF CONTENTS:
+   1. Modal Overlay & Container
+   2. Modal Header & Progress Bar
+   3. Accordion List (Friends & Code)
+   4. Code Display & Prettyprint
+   5. Status Banners (Auth, Locked, Fallback, Error)
+   6. Code Toolbar (Explain + View Original)
+   7. Sidebar Injection
+   8. AI Chat Window (Draggable, Resizable)
+   9. Chat Messages & Bubbles
+   10. Chat Input Area
+   11. Markdown Rendering (Code Blocks, Inline, Headers, Lists)
+   12. Prettyprint Color Overrides (High Contrast)
+   13. Typing Indicator
+   14. Window Controls (Minimize/Close)
+   15. Toast Notifications
+   ============================================================================= */
+
+
+/* =============================================================================
+   1. MODAL OVERLAY & CONTAINER
+   ============================================================================= */
+#cf_friends_modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+}
+
+.modalContent {
+    background-color: #fff;
+    position: relative;
+    margin: 5vh auto;
+    padding: 0;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 1000px;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.modalClose {
+    color: #666;
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1;
+    z-index: 100;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modalClose:hover {
+    color: #d00;
+}
+
+
+/* =============================================================================
+   2. MODAL HEADER & PROGRESS BAR
+   ============================================================================= */
+.modalHeaderContainer {
+    padding: 20px 20px 10px 20px;
+    background-color: #fdfdfd;
+    border-bottom: 1px solid #eee;
+}
+
+.modalCodeHeader {
+    color: #0054aa;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.progress-info {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.progress-track {
+    width: 100%;
+    height: 4px;
+    background-color: #eee;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #0054aa;
+    transition: width 0.3s ease;
+}
+
+
+/* =============================================================================
+   3. ACCORDION LIST (Scrollable Friends & Code)
+   ============================================================================= */
+#cf_friends_list_container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #fafafa;
+}
+
+.accordion-item {
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.accordion-header {
+    padding: 15px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+    user-select: none;
+}
+
+.accordion-header:hover {
+    background-color: #f0f7ff;
+}
+
+.accordion-header.active {
+    background-color: #eef;
+    border-bottom: 1px solid #ddd;
+}
+
+.friend-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-family: "Verdana", sans-serif;
+    text-decoration: none;
+    z-index: 10;
+}
+
+.friend-name:hover {
+    text-decoration: underline !important;
+}
+
+.friend-status-info {
+    font-size: 1rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.accordion-content {
+    display: none;
+    padding: 0;
+    background-color: #fff;
+}
+
+
+/* =============================================================================
+   4. CODE DISPLAY & PRETTYPRINT
+   ============================================================================= */
+.prettyprint {
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    font-size: 14px !important;
+    overflow-x: auto;
+    max-height: 60vh;
+}
+
+.loading-spinner {
+    padding: 30px;
+    text-align: center;
+    color: #0054aa;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+
+/* =============================================================================
+   5. STATUS BANNERS (Auth Error, Locked, Fallback)
+   ============================================================================= */
+.cf-status-banner {
+    padding: 20px;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.cf-status-banner__title {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.cf-status-banner__subtitle {
+    font-size: 0.9em;
+    display: block;
+    margin: 5px 0 15px 0;
+}
+
+.cf-status-banner__actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* -- Error variant (session expired) */
+.cf-status-banner--error {
+    color: #e06c75;
+    background: #fff0f0;
+    border: 1px solid #ffcccc;
+}
+
+.cf-status-banner--error .cf-status-banner__subtitle {
+    color: #666;
+}
+
+/* -- Locked variant (restricted access) */
+.cf-status-banner--locked {
+    color: #888;
+    background: #f8f9fa;
+}
+
+/* -- Fallback variant (generic failure) */
+.cf-status-banner--fallback {
+    color: #666;
+}
+
+.cf-status-banner--fallback a {
+    color: #0054aa;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+
+/* =============================================================================
+   6. CODE TOOLBAR (Explain + View Original)
+   ============================================================================= */
+.cf-code-toolbar {
+    padding: 8px 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cf-btn-explain {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: opacity 0.2s;
+}
+
+.cf-btn-explain:hover {
+    opacity: 0.9;
+}
+
+.cf-btn-view-original {
+    color: #0054aa;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.cf-btn-view-original:hover {
+    text-decoration: underline;
+}
+
+.cf-btn-login {
+    background: #0054aa;
+    color: white;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9em;
+    border: 1px solid #004080;
+    transition: background 0.2s;
+}
+
+.cf-btn-login:hover {
+    background: #004080;
+}
+
+.cf-btn-retry {
+    background: #fff;
+    color: #333;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: background 0.2s;
+}
+
+.cf-btn-retry:hover {
+    background: #f0f0f0;
+}
+
+
+/* =============================================================================
+   7. SIDEBAR INJECTION
+   ============================================================================= */
+.sidebar-link {
+    cursor: pointer;
+    color: #0054aa;
+    font-weight: bold;
+}
+
+.sidebar-link:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
+
+/* =============================================================================
+   8. AI CHAT WINDOW (Draggable, Resizable)
+   ============================================================================= */
+.cf-ai-chat-window {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 380px;
+    height: 550px;
+    min-width: 300px;
+    min-height: 250px;
+    resize: both;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    z-index: 10001;
+    border-radius: 12px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.cf-ai-chat-window.window-minimized {
+    height: auto !important;
+    min-height: unset !important;
+    resize: none;
+}
+
+.cf-ai-header {
+    background: linear-gradient(135deg, #0054aa, #425e9d);
+    color: white;
+    padding: 12px 15px;
+    font-weight: bold;
+    cursor: move;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.cf-ai-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+    height: 100%;
+    transition: all 0.2s ease;
+}
+
+.cf-ai-body.minimized {
+    display: none;
+    height: 0;
+    overflow: hidden;
+}
+
+
+/* =============================================================================
+   9. CHAT MESSAGES & BUBBLES
+   ============================================================================= */
+.cf-ai-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+}
+
+.cf-msg {
+    padding: 10px 14px;
+    border-radius: 10px;
+    max-width: 88%;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.cf-msg.user {
+    background: #e3f2fd;
+    color: #0d47a1;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.cf-msg.model {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.cf-msg.user-system {
+    background: transparent;
+    color: #888;
+    align-self: center;
+    font-size: 0.85em;
+    font-style: italic;
+    padding: 5px;
+    text-align: center;
+}
+
+.cf-msg pre {
+    background: #282c34;
+    color: #abb2bf;
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: 'Consolas', monospace;
+    font-size: 0.9em;
+    margin-top: 8px;
+    white-space: pre-wrap;
+}
+
+.cf-msg b {
+    color: #000;
+    font-weight: 700;
+}
+
+
+/* =============================================================================
+   10. CHAT INPUT AREA
+   ============================================================================= */
+.cf-ai-input-area {
+    padding: 12px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.cf-ai-input-area textarea {
+    flex-grow: 1;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    outline: none;
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 1.4;
+    resize: none;
+    overflow-y: hidden;
+    min-height: 38px;
+    max-height: 120px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.cf-ai-input-area textarea:focus {
+    border-color: #0054aa;
+}
+
+.cf-ai-input-area button {
+    background: #0054aa;
+    color: white;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.cf-ai-input-area button:hover {
+    background: #003f80;
+}
+
+
+/* =============================================================================
+   11. MARKDOWN RENDERING (Code Blocks, Inline Code, Headers, Lists)
+   ============================================================================= */
+
+/* Code Block Container */
+.md-code-wrapper {
+    margin: 10px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #d0d7de;
+    background-color: #ffffff;
+}
+
+.md-code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    background-color: #f6f8fa;
+    border-bottom: 1px solid #d0d7de;
+    font-size: 0.8rem;
+    color: #57606a;
+}
+
+.md-lang {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.copy-btn {
+    background: transparent;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    color: #57606a;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background-color: #e3e6e9;
+    color: #24292f;
+}
+
+.md-code-wrapper pre {
+    margin: 0;
+    padding: 12px;
+    background-color: #ffffff !important;
+    color: #24292e !important;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+    line-height: 1.45;
+}
+
+/* Inline Code */
+.inline-code {
+    background: rgba(175, 184, 193, 0.2);
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    font-family: 'Consolas', monospace;
+    font-size: 85%;
+    color: #24292e;
+}
+
+/* Headers inside chat messages */
+.cf-msg h1,
+.cf-msg h2,
+.cf-msg h3 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.cf-msg h1 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.3em;
+}
+
+.cf-msg h2 {
+    font-size: 1.3em;
+}
+
+.cf-msg h3 {
+    font-size: 1.1em;
+    color: #444;
+}
+
+/* List Items */
+.md-list-item {
+    margin-left: 20px;
+    list-style-type: disc;
+    display: list-item;
+}
+
+
+/* =============================================================================
+   12. PRETTYPRINT COLOR OVERRIDES (High Contrast for Chat)
+   ============================================================================= */
+.cf-msg .pln { color: #24292e !important; }
+.cf-msg .str { color: #22863a !important; }
+.cf-msg .kwd { color: #d73a49 !important; font-weight: bold; }
+.cf-msg .com { color: #6a737d !important; font-style: italic; }
+.cf-msg .typ { color: #6f42c1 !important; }
+.cf-msg .lit { color: #005cc5 !important; }
+.cf-msg .pun { color: #24292e !important; }
+.cf-msg .tag { color: #22863a !important; }
+.cf-msg .atn { color: #6f42c1 !important; }
+.cf-msg .atv { color: #032f62 !important; }
+.cf-msg .dec { color: #d73a49 !important; }
+
+
+/* =============================================================================
+   13. TYPING INDICATOR (Bouncing Dots)
+   ============================================================================= */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 10px;
+    background: #e3f2fd;
+    border-radius: 12px;
+    width: fit-content;
+}
+
+.typing-indicator span {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: #0054aa;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+
+/* =============================================================================
+   14. WINDOW CONTROLS (Minimize / Close)
+   ============================================================================= */
+.cf-win-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.cf-ai-min {
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 5px;
+    opacity: 0.8;
+}
+
+.cf-ai-close {
+    cursor: pointer;
+    font-size: 1.4rem;
+    line-height: 1;
+    opacity: 0.8;
+}
+
+.cf-ai-min:hover,
+.cf-ai-close:hover {
+    opacity: 1;
+}
+
+
+/* =============================================================================
+   15. TOAST NOTIFICATIONS
+   ============================================================================= */
+.cf-toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10002;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+}
+
+.cf-toast {
+    pointer-events: auto;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: cf-toast-in 0.3s ease-out forwards;
+    max-width: 360px;
+    word-wrap: break-word;
+}
+
+.cf-toast--info {
+    background: #e3f2fd;
+    color: #0d47a1;
+    border-left: 4px solid #0054aa;
+}
+
+.cf-toast--warn {
+    background: #fff8e1;
+    color: #f57f17;
+    border-left: 4px solid #ffa000;
+}
+
+.cf-toast--error {
+    background: #fce4ec;
+    color: #c62828;
+    border-left: 4px solid #e53935;
+}
+
+.cf-toast--out {
+    animation: cf-toast-out 0.3s ease-in forwards;
+}
+
+@keyframes cf-toast-in {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes cf-toast-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
