@@ -2,8 +2,8 @@
 // 1. CONSTANTS & DEFAULTS
 // ==========================================
 const DEFAULTS = {
-    fullPrompt: "You are a competitive programming expert. Analyze the following solution for the given problem. Explain the approach, time complexity, and logic.",
-    snippetPrompt: "Explain the logic and syntax of this specific code segment in the context of competitive programming.",
+    fullPrompt: "You are a competitive programming expert. Analyze the following solution for the given problem. Explain the detailed approach, logic, time complexity, and space complexity of the friend's code exhaustively.",
+    snippetPrompt: "Explain the logic and syntax of this specific code segment in the context of the problem. Keep the explanation short, specific, and concise for a fast reply.",
     // NEW: Default Model
     defaultModel: "gemini-2.5-flash" 
 };
