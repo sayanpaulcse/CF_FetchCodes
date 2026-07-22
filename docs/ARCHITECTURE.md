@@ -59,7 +59,8 @@ CF_FetchCodes/
 │   │   └── prettify.css                 # Prettify theme
 │   │
 │   └── styles/
-│       └── content.css                  # All content script styles
+│       ├── content.css                  # All content script styles
+│       └── code-themes.css              # Dark mode syntax themes (Monokai, Dracula, etc.)
 │
 └── docs/
     ├── ARCHITECTURE.md                  # This file
@@ -367,25 +368,37 @@ Codeforces Problem Page
 
 ## CSS Architecture
 
-The stylesheet (`src/styles/content.css`) is organized into 15 numbered sections:
+The stylesheet (`src/styles/content.css`) is organized into numbered sections:
 
-| # | Section | Lines | Purpose |
-|---|---------|-------|---------|
-| 1 | Modal Overlay & Container | ~45 | Full-screen backdrop, modal box |
-| 2 | Modal Header & Progress Bar | ~40 | Title, progress text, animated fill bar |
-| 3 | Accordion List | ~60 | Friend cards, expand/collapse, hover states |
-| 4 | Code Display & Prettyprint | ~20 | Source code blocks, loading spinner |
-| 5 | Status Banners | ~35 | Auth error, locked, fallback (BEM naming) |
-| 6 | Code Toolbar | ~50 | Explain/View Original buttons |
-| 7 | Sidebar Injection | ~10 | "Show Codes" link styling |
-| 8 | AI Chat Window | ~30 | Fixed position, resizable, minimize states |
-| 9 | Chat Messages | ~45 | User/model/system bubble styles |
-| 10 | Chat Input Area | ~35 | Auto-growing textarea, send button |
-| 11 | Markdown Rendering | ~55 | Code blocks, inline code, headers, lists |
-| 12 | Prettyprint Overrides | ~15 | High-contrast syntax colors for chat |
-| 13 | Typing Indicator | ~20 | Bouncing dots animation |
-| 14 | Window Controls | ~15 | Minimize/close button styles |
-| 15 | Toast Notifications | ~40 | Slide-in/out notification stack |
+| # | Section | Purpose |
+|---|---------|--------|
+| 1 | Modal Overlay & Container | Full-screen backdrop, modal box |
+| 2 | Modal Header & Progress Bar | Title, progress text, animated fill bar |
+| 3 | Accordion List | Friend cards, expand/collapse, hover states |
+| 4 | Code Display & Prettyprint | Source code blocks, loading spinner |
+| 5 | Status Banners | Auth error, locked, fallback (BEM naming) |
+| 6 | Code Toolbar | Explain/View Original buttons |
+| 7 | Sidebar Injection | "Show Codes" link styling |
+| 8 | AI Chat Window | Fixed position, resizable, minimize states |
+| 9 | Chat Messages | User/model/system bubble styles |
+| 10 | Chat Input Area | Auto-growing textarea, send button |
+| 11 | Markdown Rendering | Code blocks, inline code, headers, lists |
+| 12 | Prettyprint Overrides | High-contrast syntax colors for chat |
+| 13 | Typing Indicator | Bouncing dots animation |
+| 14 | Window Controls | Minimize/close button styles |
+| 15 | Toast Notifications | Slide-in/out notification stack |
+| 16 | Page Dark Mode | Comprehensive dark mode via `[data-cf-dark]` attribute selector |
+| 17–19 | Extension UI Dark Mode | Modal, chat window, toast dark mode |
+| 20 | Dark Mode Refinements | Nav bar, sidebar, test cases, submit page fixes |
+
+A separate file `src/styles/code-themes.css` provides 6 syntax themes (Monokai, Dracula, Solarized Dark, Nord, GitHub Dark, One Dark) activated via `[data-cf-code-theme]`.
+
+### Dark Mode Strategy
+
+- Page dark mode sets `data-cf-dark="true"` on `<html>`, scoping all CSS via `[data-cf-dark="true"]`.
+- A `MutationObserver` in `ui.js` mirrors CF's test-case hover highlighting to work with `!important` overrides.
+- Code-only dark mode uses `data-cf-code-dark` + `data-cf-code-theme` attributes.
+- Popup toggles save to `chrome.storage.local`; `ui.js` listens via `chrome.storage.onChanged` for instant updates.
 
 ### Naming Conventions
 
@@ -431,6 +444,7 @@ The stylesheet (`src/styles/content.css`) is organized into 15 numbered sections
 │  • API key input                 │
 │  • Model selection               │
 │  • Custom prompt editing         │
+│  • Dark mode toggles             │
 │  • Settings saved to             │
 │    chrome.storage.local          │
 └──────────────────────────────────┘

@@ -17,6 +17,7 @@ Stuck on a Codeforces problem? Wondering how your friends solved it?
 - 💻 **Read their code** with syntax highlighting — right on the page, no navigation needed
 - 🤖 **Ask AI to explain any solution** — built-in Gemini-powered chat explainer
 - ✂️ **Explain selected code snippets** — right-click any selected text on Codeforces
+- 🌙 **Dark mode** — full page dark mode + selectable code syntax themes
 
 ---
 
@@ -86,6 +87,8 @@ Click the extension icon in the toolbar to configure:
 | 🤖 **AI Model** | Gemini model name | `gemini-2.5-flash` |
 | 📝 **Full Code Prompt** | System prompt for full code explanations | Analyze approach + complexity |
 | ✂️ **Snippet Prompt** | System prompt for right-click snippet explanations | Explain logic + syntax |
+| 🌙 **Page Dark Mode** | Dark mode for the entire Codeforces page | Off |
+| 🎨 **Code Dark Mode** | Dark mode for code blocks + syntax theme | Off / Monokai |
 
 ---
 
@@ -108,7 +111,11 @@ Click the extension icon in the toolbar to configure:
 
 ## Release Notes
 
-### v26.7.9 (Latest)
+### v26.7.22 (Latest)
+- **Dark Mode** — full page dark mode + code-only dark mode with 6 syntax themes (Monokai, Dracula, Solarized Dark, Nord, GitHub Dark, One Dark)
+- **Modern Popup** — redesigned settings popup with toggle switches
+
+### v26.7.9
 - **Two-Phase Discovery** — uses `contest.standings` for instant friend checking (10x faster)
 - **AI Code Explainer** — built-in Gemini chat for understanding solutions
 - **Right-Click Explain** — select code → right-click → explain with AI

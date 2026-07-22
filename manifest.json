@@ -1,7 +1,7 @@
 {
     "name": "CF FetchCodes",
     "description": "Fetch Accepted Codes & AI Explainer for Codeforces with Dark Mode",
-    "version": "26.7.21",
+    "version": "26.7.22",
     "manifest_version": 3,
 
     "permissions": [
