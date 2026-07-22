@@ -362,11 +362,12 @@
     border-radius: 12px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .cf-ai-chat-window.window-minimized {
-    height: auto !important;
-    min-height: unset !important;
+    height: 44px !important;
+    min-height: 44px !important;
     resize: none;
 }
 
@@ -389,13 +390,13 @@
     flex-grow: 1;
     overflow: hidden;
     height: 100%;
-    transition: all 0.2s ease;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
 .cf-ai-body.minimized {
-    display: none;
-    height: 0;
-    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
 }
 
 

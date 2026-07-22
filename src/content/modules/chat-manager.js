@@ -38,7 +38,7 @@ const ChatManager = {
      */
     createChatUI: (chatId) => {
         const html = `
-            <div id="${chatId}" class="cf-ai-chat-window">
+            <div id="${chatId}" class="cf-ai-chat-window window-minimized" style="opacity: 0; transition: none;">
                 <div class="cf-ai-header">
                     <span>🤖 AI Explainer</span>
                     <div class="cf-win-controls">
@@ -46,7 +46,7 @@ const ChatManager = {
                         <span class="cf-ai-close" id="${chatId}-close-btn">&times;</span>
                     </div>
                 </div>
-                <div id="${chatId}-body" class="cf-ai-body">
+                <div id="${chatId}-body" class="cf-ai-body minimized">
                     <div class="cf-ai-messages" id="${chatId}-msgs"></div>
                     <div class="cf-ai-input-area">
                         <textarea id="${chatId}-input" placeholder="Ask a follow-up..." rows="1"></textarea>
@@ -63,6 +63,17 @@ const ChatManager = {
         const input = document.getElementById(`${chatId}-input`);
         const sendBtn = document.getElementById(`${chatId}-send`);
         const msgContainer = document.getElementById(`${chatId}-msgs`);
+
+        // Trigger opening animation smoothly
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                chatWindow.style.transition = ''; 
+                chatWindow.style.opacity = '1';
+                chatWindow.classList.remove('window-minimized');
+                bodyPart.classList.remove('minimized');
+                minBtn.textContent = '_';
+            });
+        });
 
         // Minimize toggle
         minBtn.onclick = () => {
