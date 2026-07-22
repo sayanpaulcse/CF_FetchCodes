@@ -56,8 +56,10 @@ const UI = {
         // Page dark mode
         if (settings.cfPageDarkMode) {
             root.setAttribute('data-cf-dark', 'true');
+            UI.initTestCaseHover();
         } else {
             root.removeAttribute('data-cf-dark');
+            UI.teardownTestCaseHover();
         }
 
         // Code-only dark mode
@@ -74,6 +76,55 @@ const UI = {
         } else {
             root.removeAttribute('data-cf-code-theme');
         }
+    },
+
+    /**
+     * In dark mode, CF's built-in test case hover (yellow cross-highlighting
+     * between input/output lines) is blocked by our !important CSS.
+     *
+     * Instead of reimplementing CF's complex logic (which knows test case
+     * boundaries), we use a MutationObserver to detect when CF's JS sets
+     * inline backgroundColor and mirror that via our .cf-dark-highlight class.
+     * This preserves CF's smart test-case-aware highlighting logic.
+     */
+    _testCaseHoverObserver: null,
+    initTestCaseHover: () => {
+        if (UI._testCaseHoverObserver) return;
+
+        const lines = document.querySelectorAll(
+            '.test-example-line-even, .test-example-line-odd'
+        );
+        if (lines.length === 0) return;
+
+        UI._testCaseHoverObserver = new MutationObserver(mutations => {
+            for (const mutation of mutations) {
+                if (mutation.attributeName !== 'style') continue;
+                const el = mutation.target;
+                // CF's JS sets backgroundColor inline when hovering test cases
+                if (el.style.backgroundColor) {
+                    el.classList.add('cf-dark-highlight');
+                } else {
+                    el.classList.remove('cf-dark-highlight');
+                }
+            }
+        });
+
+        lines.forEach(line => {
+            UI._testCaseHoverObserver.observe(line, {
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        });
+    },
+
+    teardownTestCaseHover: () => {
+        if (UI._testCaseHoverObserver) {
+            UI._testCaseHoverObserver.disconnect();
+            UI._testCaseHoverObserver = null;
+        }
+        document.querySelectorAll('.cf-dark-highlight').forEach(el => {
+            el.classList.remove('cf-dark-highlight');
+        });
     },
 
     /**

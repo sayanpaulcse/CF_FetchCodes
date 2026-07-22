@@ -866,8 +866,17 @@
 [data-cf-dark="true"] .sidebox {
     background-color: var(--cf-dark-surface-alt) !important;
     border: 1px solid var(--cf-dark-border-light) !important;
+    border-top-color: var(--cf-dark-border-light) !important;
+    border-right-color: var(--cf-dark-border-light) !important;
+    border-bottom-color: var(--cf-dark-border-light) !important;
+    border-left-color: var(--cf-dark-border-light) !important;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
     color: #cccccc !important;
+}
+
+/* Override CF's .borderTopRound etc. that may set individual border colors */
+[data-cf-dark="true"] .roundbox.borderTopRound {
+    border-top: 1px solid var(--cf-dark-border-light) !important;
 }
 
 [data-cf-dark="true"] .roundbox .caption,
@@ -875,6 +884,7 @@
 [data-cf-dark="true"] .sidebox .caption {
     color: var(--cf-dark-primary) !important;
     border-bottom: 1px solid var(--cf-dark-border-light) !important;
+    background-color: var(--cf-dark-surface-light) !important;
     font-weight: bold;
 }
 
@@ -883,7 +893,7 @@
     color: #dcdcdc !important;
 }
 
-[data-cf-dark="true"] .roundbox a:hover { color: #fff !important; }
+[data-cf-dark="true"] .roundbox a:hover { color: #fff !important; background-color: transparent !important; }
 
 [data-cf-dark="true"] .rtable td,
 [data-cf-dark="true"] .rtable th {
@@ -1023,14 +1033,44 @@
     border: 1px solid var(--cf-dark-border-light) !important;
 }
 
-[data-cf-dark="true"] .sample-tests pre,
-[data-cf-dark="true"] .sample-tests .input div,
-[data-cf-dark="true"] .sample-tests .output div,
-[data-cf-dark="true"] .test-example-line-even,
-[data-cf-dark="true"] .test-example-line-odd {
+/*
+ * Container elements — keep !important to override CF light backgrounds.
+ * CRITICAL: Do NOT use ".sample-tests .input div" here because that
+ * also matches .test-example-line-* divs, blocking CF's JS hover!
+ * Only target the <pre> container and the .title div specifically.
+ */
+[data-cf-dark="true"] .sample-tests pre {
     background-color: transparent !important;
     color: var(--cf-dark-text) !important;
     font-family: 'Consolas', monospace;
+}
+
+/*
+ * Individual test lines — dark bg with !important to override CF light stripes.
+ * CF's JS hover (cross-highlighting) can't work with !important CSS,
+ * so we implement our own hover via JS in ui.js.
+ */
+[data-cf-dark="true"] .test-example-line-even {
+    background-color: var(--cf-dark-surface) !important;
+    color: var(--cf-dark-text) !important;
+    font-family: 'Consolas', monospace;
+}
+
+[data-cf-dark="true"] .test-example-line-odd {
+    background-color: var(--cf-dark-surface-alt) !important;
+    color: var(--cf-dark-text) !important;
+    font-family: 'Consolas', monospace;
+}
+
+/* Hover highlight — warm golden, very visible */
+[data-cf-dark="true"] .test-example-line-even:hover,
+[data-cf-dark="true"] .test-example-line-odd:hover {
+    background-color: rgba(229, 192, 123, 0.22) !important;
+}
+
+/* Cross-container highlight applied by our JS (cf-dark-highlight class) */
+[data-cf-dark="true"] .cf-dark-highlight {
+    background-color: rgba(229, 192, 123, 0.22) !important;
 }
 
 [data-cf-dark="true"] .sample-tests .title {
@@ -1439,3 +1479,399 @@
     color: #f87171 !important;
     border-left-color: #ef4444 !important;
 }
+
+
+/* =============================================================================
+   20. DARK MODE REFINEMENTS (Screenshot Fixes)
+   =============================================================================
+   Fixes for elements missed in the initial dark mode pass, identified from
+   real-world Codeforces page screenshots.
+   ============================================================================= */
+
+/* -------------------------------------------------------
+   20.1 SECOND-LEVEL NAVIGATION (SUBMIT CODE, STATUS, etc.)
+   ------------------------------------------------------- */
+[data-cf-dark="true"] .second-level-menu {
+    background-color: #181818 !important;
+    border-bottom: 1px solid var(--cf-dark-border) !important;
+    border-top: 1px solid var(--cf-dark-border) !important;
+}
+
+[data-cf-dark="true"] .second-level-menu ul {
+    background: transparent !important;
+}
+
+/* All nav links default to light grey */
+[data-cf-dark="true"] .second-level-menu-list li a {
+    color: #ccc !important;
+    background: transparent !important;
+    text-shadow: none !important;
+    transition: color 0.2s ease;
+}
+
+[data-cf-dark="true"] .second-level-menu-list li a:hover {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/*
+ * Active tab — CF uses lava lamp JS, not always .current class.
+ * Target all known patterns + override the lava lamp to dark.
+ */
+[data-cf-dark="true"] .second-level-menu-list li.current a,
+[data-cf-dark="true"] .second-level-menu-list li.selectedLava a {
+    color: #ffffff !important;
+    background: rgba(97, 175, 239, 0.15) !important;
+    font-weight: 600;
+}
+
+/* Lava lamp background — dark-themed instead of hidden */
+[data-cf-dark="true"] .second-level-menu .lavalamp,
+[data-cf-dark="true"] .second-level-menu .lavalamp div {
+    background: rgba(97, 175, 239, 0.12) !important;
+    border-radius: 4px;
+    opacity: 1 !important;
+}
+
+
+/* -------------------------------------------------------
+   20.2 SAMPLE TEST HOVER STATES (Critical Fix)
+   ------------------------------------------------------- */
+/* Hover highlight — warm golden tint, visible but not jarring. */
+[data-cf-dark="true"] .test-example-line-even:hover,
+[data-cf-dark="true"] .test-example-line-odd:hover {
+    background-color: rgba(229, 192, 123, 0.22) !important;
+    transition: background-color 0.15s;
+}
+
+/* Copy Button in sample tests */
+[data-cf-dark="true"] .input-output-copier {
+    background-color: var(--cf-dark-surface-light) !important;
+    color: #bbb !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
+    transition: all 0.2s ease;
+}
+
+[data-cf-dark="true"] .input-output-copier:hover {
+    background-color: var(--cf-dark-hover) !important;
+    color: #fff !important;
+}
+
+
+/* -------------------------------------------------------
+   20.3 PROBLEM STATEMENT REFINEMENTS
+   ------------------------------------------------------- */
+/* Problem header: time limit, memory limit */
+[data-cf-dark="true"] .problem-statement .header .property-title {
+    color: var(--cf-dark-text-muted) !important;
+}
+
+[data-cf-dark="true"] .problem-statement .header .time-limit,
+[data-cf-dark="true"] .problem-statement .header .memory-limit,
+[data-cf-dark="true"] .problem-statement .header .input-file,
+[data-cf-dark="true"] .problem-statement .header .output-file {
+    color: #bbb !important;
+}
+
+/* "Note" section title */
+[data-cf-dark="true"] .problem-statement .note .section-title {
+    color: #98c379 !important;
+}
+
+/* "Example" title */
+[data-cf-dark="true"] .sample-tests .section-title {
+    color: #e5c07b !important;
+}
+
+/* Sample test title ("input" / "output" labels) */
+[data-cf-dark="true"] .sample-tests .input .title,
+[data-cf-dark="true"] .sample-tests .output .title {
+    background-color: var(--cf-dark-surface-light) !important;
+    color: #aaa !important;
+    border-bottom: 1px solid var(--cf-dark-border-light) !important;
+    font-weight: 600;
+}
+
+
+/* -------------------------------------------------------
+   20.4 PROBLEM TAGS
+   ------------------------------------------------------- */
+[data-cf-dark="true"] .tag-box {
+    background-color: var(--cf-dark-surface-light) !important;
+    color: #ccc !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
+}
+
+[data-cf-dark="true"] .tag-box:hover {
+    background-color: var(--cf-dark-hover) !important;
+    color: #fff !important;
+}
+
+[data-cf-dark="true"] .notice {
+    color: var(--cf-dark-text-muted) !important;
+}
+
+
+/* -------------------------------------------------------
+   20.5 SIDEBAR IMPROVEMENTS
+   ------------------------------------------------------- */
+/* Sidebar section headers with arrows */
+[data-cf-dark="true"] .roundbox .caption.titled {
+    background-color: var(--cf-dark-surface-light) !important;
+    color: var(--cf-dark-primary) !important;
+    border-bottom: 1px solid var(--cf-dark-border-light) !important;
+}
+
+/* Sidebar body text */
+[data-cf-dark="true"] .roundbox .bottom-links,
+[data-cf-dark="true"] .roundbox .bottom-links td {
+    background-color: transparent !important;
+    border-color: var(--cf-dark-border-light) !important;
+}
+
+/* "Register for practice" / "Start virtual contest" buttons */
+[data-cf-dark="true"] .roundbox a.button,
+[data-cf-dark="true"] #sidebar a[style*="background"],
+[data-cf-dark="true"] .roundbox input[type="submit"] {
+    background: #0054aa !important;
+    color: #fff !important;
+    border: 1px solid #004080 !important;
+    text-shadow: none !important;
+}
+
+[data-cf-dark="true"] .roundbox a.button:hover {
+    background: #0066cc !important;
+}
+
+/* Sidebar inner list items */
+[data-cf-dark="true"] .roundbox ul li {
+    border-bottom-color: var(--cf-dark-border) !important;
+}
+
+/* Sidebar list link hover */
+[data-cf-dark="true"] .sidebox ul li a:hover,
+[data-cf-dark="true"] .roundbox ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    color: #fff !important;
+}
+
+/* Extension sidebar: "Show Codes" link */
+[data-cf-dark="true"] .sidebar-link {
+    color: var(--cf-dark-primary) !important;
+}
+
+[data-cf-dark="true"] .sidebar-link:hover {
+    color: #4fa6ff !important;
+    text-decoration: underline !important;
+}
+
+
+/* -------------------------------------------------------
+   20.6 CONTEST MATERIALS (Announcement / Tutorial)
+   ------------------------------------------------------- */
+[data-cf-dark="true"] .roundbox .rtable {
+    background-color: transparent !important;
+}
+
+[data-cf-dark="true"] .roundbox .rtable td {
+    background-color: transparent !important;
+    border-color: var(--cf-dark-border) !important;
+    color: #ccc !important;
+}
+
+[data-cf-dark="true"] .roundbox .rtable a {
+    color: #bbb !important;
+}
+
+[data-cf-dark="true"] .roundbox .rtable a:hover {
+    color: var(--cf-dark-primary) !important;
+    background-color: transparent !important;
+}
+
+/* Colored indicator squares */
+[data-cf-dark="true"] .roundbox .rtable .small-square {
+    opacity: 0.9;
+}
+
+/* Fix: Announcement/Tutorial hover — force dark on ALL hover states */
+[data-cf-dark="true"] .roundbox .rtable td:hover,
+[data-cf-dark="true"] .roundbox .rtable tr:hover td {
+    background-color: var(--cf-dark-hover) !important;
+    color: #eee !important;
+}
+
+/*
+ * Override CF's inline background colors on sidebar elements.
+ * Only target the specific background property, not ALL style attributes.
+ */
+[data-cf-dark="true"] #sidebar [style*="background-color"],
+[data-cf-dark="true"] #sidebar [style*="background:"] {
+    background-color: var(--cf-dark-surface-alt) !important;
+    background: var(--cf-dark-surface-alt) !important;
+    color: #eee !important;
+}
+
+/* Popup overlays / dropdowns that appear on hover */
+[data-cf-dark="true"] .popup,
+[data-cf-dark="true"] .popup-content,
+[data-cf-dark="true"] .clickable-popup,
+[data-cf-dark="true"] .ac_results {
+    background-color: var(--cf-dark-surface-alt) !important;
+    color: var(--cf-dark-text) !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
+}
+
+/* Any highlighted/selected item inside popups */
+[data-cf-dark="true"] .popup a,
+[data-cf-dark="true"] .popup-content a,
+[data-cf-dark="true"] .clickable-popup a {
+    color: #ccc !important;
+}
+
+[data-cf-dark="true"] .popup a:hover,
+[data-cf-dark="true"] .popup-content a:hover {
+    color: var(--cf-dark-primary) !important;
+    background-color: rgba(255,255,255,0.05) !important;
+}
+
+
+/* -------------------------------------------------------
+   20.7 SUBMIT CODE PAGE
+   ------------------------------------------------------- */
+[data-cf-dark="true"] .submitForm {
+    background-color: var(--cf-dark-surface) !important;
+    border-color: var(--cf-dark-border-light) !important;
+}
+
+[data-cf-dark="true"] .submitForm label,
+[data-cf-dark="true"] .submitForm .field-name {
+    color: var(--cf-dark-text) !important;
+}
+
+[data-cf-dark="true"] .file-form-line,
+[data-cf-dark="true"] .submitForm .table-form td {
+    background-color: transparent !important;
+    border-color: var(--cf-dark-border) !important;
+    color: var(--cf-dark-text) !important;
+}
+
+/* Language dropdown */
+[data-cf-dark="true"] select.submit-language,
+[data-cf-dark="true"] .submit-language select {
+    background-color: var(--cf-dark-surface-light) !important;
+    color: var(--cf-dark-text) !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
+}
+
+/* Source code editor container */
+[data-cf-dark="true"] .problem-submit-editor {
+    background-color: var(--cf-dark-surface) !important;
+    border-color: var(--cf-dark-border-light) !important;
+}
+
+
+/* -------------------------------------------------------
+   20.8 TABLE & STANDINGS REFINEMENTS
+   ------------------------------------------------------- */
+/* Highlighted/hovered rows */
+[data-cf-dark="true"] .datatable tr:hover td,
+[data-cf-dark="true"] .rtable tr:hover td {
+    background-color: rgba(97, 175, 239, 0.06) !important;
+}
+
+/* Highlighted rows (e.g., own submissions) */
+[data-cf-dark="true"] .highlighted-row td,
+[data-cf-dark="true"] .datatable .highlighted-row td {
+    background-color: rgba(97, 175, 239, 0.1) !important;
+}
+
+/* Even/odd row striping */
+[data-cf-dark="true"] table.rtable tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+
+/* -------------------------------------------------------
+   20.9 TOOLTIPS & POPUPS
+   ------------------------------------------------------- */
+[data-cf-dark="true"] .ac_results {
+    background-color: var(--cf-dark-surface-alt) !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
+    color: var(--cf-dark-text) !important;
+}
+
+[data-cf-dark="true"] .ac_results li {
+    color: var(--cf-dark-text) !important;
+}
+
+[data-cf-dark="true"] .ac_results li:hover,
+[data-cf-dark="true"] .ac_results .ac_over {
+    background-color: var(--cf-dark-hover) !important;
+    color: #fff !important;
+}
+
+/* Tippy / Title tooltips */
+[data-cf-dark="true"] .tippy-box,
+[data-cf-dark="true"] .tooltip {
+    background-color: var(--cf-dark-surface-light) !important;
+    color: var(--cf-dark-text) !important;
+    border: 1px solid var(--cf-dark-border-light) !important;
+}
+
+
+/* -------------------------------------------------------
+   20.10 MISC PAGE ELEMENTS
+   ------------------------------------------------------- */
+/* Horizontal rules */
+[data-cf-dark="true"] hr {
+    border-color: var(--cf-dark-border) !important;
+}
+
+/* Info/notice boxes */
+[data-cf-dark="true"] .note-box,
+[data-cf-dark="true"] .info {
+    background-color: var(--cf-dark-surface-alt) !important;
+    color: var(--cf-dark-text) !important;
+    border-color: var(--cf-dark-border-light) !important;
+}
+
+/* Blog/editorial content */
+[data-cf-dark="true"] .content-with-sidebar .ttypography {
+    color: var(--cf-dark-text) !important;
+}
+
+/* Tab content panels */
+[data-cf-dark="true"] .bordertable,
+[data-cf-dark="true"] .bordertable td {
+    background-color: var(--cf-dark-surface) !important;
+    border-color: var(--cf-dark-border) !important;
+    color: var(--cf-dark-text) !important;
+}
+
+/* Diff highlight blocks */
+[data-cf-dark="true"] .diff-output {
+    background-color: var(--cf-dark-surface) !important;
+    color: var(--cf-dark-text) !important;
+}
+
+/* "No tag edit access" text */
+[data-cf-dark="true"] .roundbox .smaller {
+    color: var(--cf-dark-text-muted) !important;
+}
+
+/* Star rating difficulty */
+[data-cf-dark="true"] .star-ratings {
+    color: var(--cf-dark-text-muted) !important;
+}
+
+/* Checkboxes & labels in sidebar */
+[data-cf-dark="true"] .roundbox label,
+[data-cf-dark="true"] .sidebox label {
+    color: var(--cf-dark-text) !important;
+}
+
+/* Problem page bottom links (e.g., "Submit", "Problem set", etc.) */
+[data-cf-dark="true"] .problem-statement + div a {
+    color: var(--cf-dark-primary) !important;
+}
+
