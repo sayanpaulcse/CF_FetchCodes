@@ -1,7 +1,7 @@
 # Privacy Policy for CF FetchCodes
 
-**Effective Date:** July 22, 2026  
-**Last Updated:** July 22, 2026
+**Effective Date:** July 23, 2026  
+**Last Updated:** July 23, 2026
 
 CF FetchCodes ("we", "our", or "the extension") is a Google Chrome browser extension designed to enhance the Codeforces platform by allowing users to view their friends' accepted solutions and interact with an AI code explainer.
 
