@@ -182,9 +182,17 @@
 }
 
 .accordion-content {
-    display: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
     padding: 0;
     background-color: #fff;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.accordion-content.expanded {
+    max-height: 90vh; /* slightly taller than the .prettyprint max-height */
+    opacity: 1;
 }
 
 

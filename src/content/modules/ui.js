@@ -340,16 +340,16 @@ const UI = {
      */
     toggleCode: async (submissionId, contestId, language, headerElement) => {
         const contentDiv = document.getElementById(`sub-${submissionId}`);
-        const isClosed = contentDiv.style.display === '' || contentDiv.style.display === 'none';
+        const isClosed = !contentDiv.classList.contains('expanded');
 
         if (isClosed) {
-            contentDiv.style.display = 'block';
+            contentDiv.classList.add('expanded');
             headerElement.classList.add('active');
             if (contentDiv.innerHTML.trim() === "") {
                 await UI.loadCodeIntoDiv(contentDiv, submissionId, contestId, language);
             }
         } else {
-            contentDiv.style.display = 'none';
+            contentDiv.classList.remove('expanded');
             headerElement.classList.remove('active');
         }
     },
