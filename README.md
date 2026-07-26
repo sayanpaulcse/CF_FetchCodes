@@ -141,7 +141,7 @@ Click the extension icon in the toolbar to configure:
 - Use this tool to learn, improve your logic, and get unstuck during practice..not to cheat your rating. 
 
 ### 📚 Read the Official Codeforces Stance on AI & Cheating:
-- Mike's Blog on AI Rules: [https://codeforces.com/blog/entry/133941](https://codeforces.com/blog/entry/133941)[https://codeforces.com/blog/entry/133941] (The official announcement banning ChatGPT, Copilot, and AI tools during live rounds)
+- Mike's Blog on AI Rules: [https://codeforces.com/blog/entry/133941](https://codeforces.com/blog/entry/133941)(The official announcement banning ChatGPT, Copilot, and AI tools during live rounds)
 - General Codeforces Rules: [https://codeforces.com/blog/entry/4088](https://codeforces.com/blog/entry/4088)
 ---
 ## Contributing
