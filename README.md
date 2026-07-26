@@ -111,7 +111,7 @@ Click the extension icon in the toolbar to configure:
 
 ## Release Notes
 
-### v26.7.22 (Latest)
+### v26.7.23 (Latest)
 - **Dark Mode** — full page dark mode + code-only dark mode with 6 syntax themes (Monokai, Dracula, Solarized Dark, Nord, GitHub Dark, One Dark)
 - **Modern Popup** — redesigned settings popup with toggle switches
 
@@ -134,7 +134,16 @@ Click the extension icon in the toolbar to configure:
 - Navigation links to profiles and submissions
 
 ---
+### ⚠️ DISCLAIMER: 
+- DO NOT use this extension during live Codeforces rounds.
+- CF FetchCodes is built strictly for UPSOLVING and PRACTICE after a contest is completely finished.
+- Using AI or any external code during a live, rated round is strictly prohibited by Codeforces and ruins the platform for everyone.
+- Use this tool to learn, improve your logic, and get unstuck during practice..not to cheat your rating. 
 
+### 📚 Read the Official Codeforces Stance on AI & Cheating:
+- Mike's Blog on AI Rules: [https://codeforces.com/blog/entry/133941](https://codeforces.com/blog/entry/133941)[https://codeforces.com/blog/entry/133941] (The official announcement banning ChatGPT, Copilot, and AI tools during live rounds)
+- General Codeforces Rules: [https://codeforces.com/blog/entry/4088](https://codeforces.com/blog/entry/4088)
+---
 ## Contributing
 
 Issues, feature requests, and pull requests are welcome at the [GitHub repository](https://github.com/sayanpaulcse/CF_FetchCodes).
