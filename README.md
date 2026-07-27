@@ -98,6 +98,7 @@ Click the extension icon in the toolbar to configure:
 - **Anti-ban architecture** — human-like delays and smart batching prevent rate-limiting
 - **Two-phase discovery** — uses `contest.standings` API for bulk checking, minimizing API calls
 - **API key stored locally** — your Gemini key is saved in `chrome.storage.local`, never transmitted anywhere except Google's Gemini API
+- **Minimal permissions** — only `storage` is required on install. The `contextMenus` permission (for right-click explain) is requested only when you enable AI features
 
 ---
 
@@ -111,7 +112,11 @@ Click the extension icon in the toolbar to configure:
 
 ## Release Notes
 
-### v26.7.23 (Latest)
+### v26.7.27 (Latest)
+- **Optional Permissions** — `contextMenus` is now optional; requested only when you save an API key. No more scary "new permissions" prompt on update
+- **Trust Disclaimer** — API key field now shows "Stored locally only — never sent to our servers"
+
+### v26.7.23
 - **Dark Mode** — full page dark mode + code-only dark mode with 6 syntax themes (Monokai, Dracula, Solarized Dark, Nord, GitHub Dark, One Dark)
 - **Modern Popup** — redesigned settings popup with toggle switches
 
