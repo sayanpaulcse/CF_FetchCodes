@@ -88,6 +88,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     status.innerText = "";
                 }, 2000);
             });
+
+            // If user provided an API key, request contextMenus for right-click explain
+            if (key) {
+                chrome.permissions.contains({ permissions: ['contextMenus'] }, (alreadyGranted) => {
+                    if (alreadyGranted) {
+                        // Permission already granted — just ensure the menu exists
+                        chrome.runtime.sendMessage({ action: "enable_context_menu" });
+                    } else {
+                        // Request the optional permission
+                        chrome.permissions.request({ permissions: ['contextMenus'] }, (granted) => {
+                            if (granted) {
+                                chrome.runtime.sendMessage({ action: "enable_context_menu" });
+                            }
+                            // If denied, save still works — they just won't have right-click explain
+                        });
+                    }
+                });
+            }
         });
     }
 
